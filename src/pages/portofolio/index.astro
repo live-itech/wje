@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Remah from '../../components/Remah.astro';
+import GaleriProyek from '../../components/GaleriProyek.astro';
+import CTAPenutup from '../../components/CTAPenutup.astro';
+import { PORTOFOLIO } from '../../data/portofolio';
+import { LAYANAN, PAYUNG_LABEL, type Payung } from '../../data/layanan';
+import { BISNIS } from '../../data/bisnis';
+import { linkWA } from '../../lib/wa';
+import { schemaRemah } from '../../lib/schema';
+
+const payungUrut: Payung[] = ['crane', 'lift', 'elektrik'];
+const jalur = [
+  { nama: 'Beranda', url: '/' },
+  { nama: 'Portofolio', url: '/portofolio/' },
+];
+---
+
+<BaseLayout
+  title="Portofolio Proyek | CV Wahyu Jaya Electric Surabaya"
+  deskripsi="Kumpulan proyek hoist crane, lift barang, dan instalasi listrik yang kami kerjakan di Surabaya dan sekitarnya, lengkap dengan lokasi dan spesifikasinya."
+  path="/portofolio/"
+  skema={[schemaRemah(jalur)]}
+>
+  <Remah jalur={jalur} />
+
+  <section class="mx-auto max-w-5xl px-4 pb-6 pt-12">
+    <h1 class="text-3xl font-extrabold tracking-tight text-wje-950 sm:text-4xl">
+      Proyek yang Sudah Kami Kerjakan
+    </h1>
+    <p class="mt-4 max-w-2xl text-lg text-wje-800">
+      Semua foto di halaman ini adalah hasil pekerjaan kami sendiri, lengkap dengan lokasi dan
+      spesifikasinya. Kalau ada yang mirip kebutuhan Anda, sebutkan saja saat menghubungi kami.
+    </p>
+  </section>
+
+  {
+    PORTOFOLIO.length > 0 ? (
+      payungUrut.map((p) => (
+        <GaleriProyek
+          proyek={PORTOFOLIO.filter((x) => x.payung === p)}
+          judul={PAYUNG_LABEL[p]}
+          maks={99}
+        />
+      ))
+    ) : (
+      <section class="mx-auto max-w-5xl px-4 py-10">
+        <div class="rounded-xl border border-wje-100 bg-wje-50 p-6">
+          <p class="text-wje-800">
+            Dokumentasi proyek sedang kami susun. Sementara ini, silakan hubungi kami lewat
+            WhatsApp dan sebutkan jenis pekerjaan yang Anda butuhkan. Kami kirimkan foto
+            pekerjaan serupa yang pernah kami tangani.
+          </p>
+        </div>
+
+        <h2 class="mb-5 mt-10 text-xl font-bold text-wje-950">Layanan Kami</h2>
+        <ul class="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+          {LAYANAN.map((l) => (
+            <li>
+              <a
+                href={`/${l.slug}/`}
+                class="block rounded-lg border border-wje-100 px-4 py-3 text-sm font-medium text-wje-800 hover:border-aksen-400 hover:text-aksen-600"
+              >
+                {l.h1.split('—')[0].trim()}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  <CTAPenutup
+    hrefWA={linkWA(`Halo ${BISNIS.nama}, saya ingin melihat contoh pekerjaan yang pernah Anda tangani.`)}
+    judul="Ingin lihat contoh yang mirip kebutuhan Anda?"
+    isi="Sebutkan jenis pekerjaannya lewat WhatsApp, kami kirimkan foto pekerjaan serupa."
+    posisi="penutup-portofolio"
+  />
+</BaseLayout>

@@ -1,0 +1,24 @@
+---
+/** Empat langkah proses kerja. Sama di semua halaman layanan, jadi datanya dari layanan.ts. */
+import { PROSES_KERJA } from '../data/layanan';
+---
+
+<section class="bg-wje-50 py-14">
+  <div class="mx-auto max-w-5xl px-4">
+    <h2 class="mb-2 text-2xl font-bold text-wje-950 sm:text-3xl">Cara Kami Bekerja</h2>
+    <p class="mb-8 text-wje-600">Empat langkah, tanpa biaya tersembunyi di tengah jalan.</p>
+    <ol class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        PROSES_KERJA.map((p, i) => (
+          <li class="rounded-xl border border-wje-100 bg-white p-5">
+            <span class="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-lg bg-aksen-500 text-sm font-bold text-white">
+              {i + 1}
+            </span>
+            <h3 class="mb-1.5 font-bold text-wje-950">{p.judul}</h3>
+            <p class="text-sm leading-relaxed text-wje-600">{p.isi}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

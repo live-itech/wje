@@ -1,0 +1,145 @@
+---
+/**
+ * Tentang Kami.
+ *
+ * Halaman ini jarang dicari lewat Google, tapi hampir selalu dibuka calon
+ * pelanggan pabrik sebelum memutuskan. Yang mereka cari: legalitas, siapa yang
+ * mengerjakan, dan bukti bahwa usahanya nyata.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Remah from '../components/Remah.astro';
+import CTAPenutup from '../components/CTAPenutup.astro';
+import BuktiCepat from '../components/BuktiCepat.astro';
+import { BISNIS, belumDiisi } from '../data/bisnis';
+import { LAYANAN, PAYUNG_LABEL, type Payung } from '../data/layanan';
+import { linkWA } from '../lib/wa';
+import { schemaRemah } from '../lib/schema';
+
+const payungUrut: Payung[] = ['crane', 'lift', 'elektrik'];
+const legalitas = BISNIS.legalitas.filter((l) => !belumDiisi(l.nomor));
+const adaPenulis = !belumDiisi(BISNIS.penulis.nama);
+const adaTahun = !belumDiisi(BISNIS.berdiriTahun);
+
+const jalur = [
+  { nama: 'Beranda', url: '/' },
+  { nama: 'Tentang Kami', url: '/tentang-kami/' },
+];
+---
+
+<BaseLayout
+  title="Tentang CV Wahyu Jaya Electric Surabaya"
+  deskripsi="Profil CV Wahyu Jaya Electric, penyedia jasa hoist crane, lift barang, dan instalasi listrik industri di Surabaya. Dikerjakan tim sendiri, bukan dialihkan."
+  path="/tentang-kami/"
+  skema={[schemaRemah(jalur)]}
+>
+  <Remah jalur={jalur} />
+
+  <section class="mx-auto max-w-3xl px-4 pb-10 pt-12">
+    <h1 class="text-3xl font-extrabold tracking-tight text-wje-950 sm:text-4xl">
+      Tentang {BISNIS.nama}
+    </h1>
+    <p class="mt-5 text-lg leading-relaxed text-wje-800">
+      Kami mengerjakan tiga hal yang saling berkaitan di dunia industri: mengangkat beban berat
+      dengan hoist crane, memindahkan barang antar lantai dengan lift barang, dan mengalirkan
+      listrik yang menggerakkan keduanya. Ketiganya dikerjakan tim kami sendiri, bukan dialihkan
+      ke pihak lain.
+    </p>
+    {
+      adaTahun && (
+        <p class="mt-4 text-lg leading-relaxed text-wje-800">
+          Kami melayani pabrik, gudang, bengkel, dan bangunan usaha di Surabaya dan sekitarnya
+          sejak {BISNIS.berdiriTahun}.
+        </p>
+      )
+    }
+  </section>
+
+  <BuktiCepat />
+
+  {
+    adaPenulis && (
+      <section class="mx-auto max-w-3xl px-4 py-12">
+        <h2 class="mb-4 text-2xl font-bold text-wje-950">Siapa yang Mengerjakan</h2>
+        <p class="text-lg leading-relaxed text-wje-800">
+          Pekerjaan di lapangan dipimpin langsung oleh {BISNIS.penulis.nama},
+          {BISNIS.penulis.jabatan} di {BISNIS.nama}. Survey lokasi dan pembahasan teknis
+          dikerjakan langsung oleh beliau, bukan oleh tenaga pemasaran yang tidak ikut ke lapangan.
+        </p>
+      </section>
+    )
+  }
+
+  <section class="mx-auto max-w-3xl px-4 py-12">
+    <h2 class="mb-6 text-2xl font-bold text-wje-950">Yang Kami Kerjakan</h2>
+    <div class="space-y-8">
+      {
+        payungUrut.map((p) => (
+          <div>
+            <h3 class="mb-3 text-lg font-bold text-wje-950">{PAYUNG_LABEL[p]}</h3>
+            <ul class="space-y-2">
+              {LAYANAN.filter((l) => l.payung === p).map((l) => (
+                <li>
+                  <a
+                    href={`/${l.slug}/`}
+                    class="font-medium text-aksen-600 underline underline-offset-4 hover:text-aksen-500"
+                  >
+                    {l.h1.split('—')[0].trim()}
+                  </a>
+                  <span class="text-wje-600"> — {l.ringkas}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  {
+    legalitas.length > 0 && (
+      <section class="mx-auto max-w-3xl px-4 py-12">
+        <h2 class="mb-4 text-2xl font-bold text-wje-950">Legalitas</h2>
+        <p class="mb-5 text-wje-800">
+          Dokumen berikut dapat kami tunjukkan saat survey, dan salinannya dilampirkan pada
+          penawaran untuk pekerjaan yang membutuhkannya.
+        </p>
+        <ul class="divide-y divide-wje-100 rounded-xl border border-wje-100">
+          {legalitas.map((l) => (
+            <li class="flex flex-wrap justify-between gap-2 px-5 py-3">
+              <span class="font-medium text-wje-950">{l.nama}</span>
+              <span class="text-wje-600">{l.nomor}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  <section class="mx-auto max-w-3xl px-4 py-12">
+    <h2 class="mb-4 text-2xl font-bold text-wje-950">Cara Kami Menangani Pekerjaan</h2>
+    <ul class="space-y-3 text-wje-800">
+      <li class="flex gap-3">
+        <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-aksen-500" aria-hidden="true"></span>
+        <span>Survey lokasi gratis dan tidak ada kewajiban melanjutkan setelahnya.</span>
+      </li>
+      <li class="flex gap-3">
+        <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-aksen-500" aria-hidden="true"></span>
+        <span>Penawaran tertulis berisi rincian pekerjaan, merk komponen, dan jangka waktu.</span>
+      </li>
+      <li class="flex gap-3">
+        <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-aksen-500" aria-hidden="true"></span>
+        <span>Kalau suatu pekerjaan tidak memungkinkan, kami sampaikan saat survey, bukan setelah uang muka masuk.</span>
+      </li>
+      <li class="flex gap-3">
+        <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-aksen-500" aria-hidden="true"></span>
+        <span>Serah terima disertai uji coba bersama dan penjelasan pemakaian untuk operator Anda.</span>
+      </li>
+    </ul>
+  </section>
+
+  <CTAPenutup
+    hrefWA={linkWA(`Halo ${BISNIS.nama}, saya ingin berkenalan dan bertanya soal layanan Anda.`)}
+    judul="Ingin bicara langsung?"
+    posisi="penutup-tentang"
+  />
+</BaseLayout>

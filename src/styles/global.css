@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+/*
+  Palet mengikuti logo WJE: hitam, merah, dan abu. Merahnya diambil persis dari
+  berkas logo, jadi warna tombol dan aksen di situs sama dengan warna logo.
+
+  Hijau WhatsApp sengaja dibiarkan hijau aslinya walau di luar palet. Warna itu
+  sudah dikenali orang sebagai WhatsApp, dan mengubahnya menjadi merah justru
+  menurunkan jumlah yang menekan.
+*/
+@theme {
+  --color-wje-950: #0b0f14;
+  --color-wje-900: #141b23;
+  --color-wje-800: #1f2a36;
+  --color-wje-600: #45596e;
+  --color-wje-300: #a9b7c5;
+  --color-wje-100: #e8edf2;
+  --color-wje-50: #f5f8fa;
+
+  /* Merah diambil langsung dari logo WJE, #C81232. */
+  --color-aksen-700: #9e0e28;
+  --color-aksen-600: #c81232;
+  --color-aksen-500: #e0244a;
+  --color-aksen-400: #ee5570;
+
+  --color-wa-600: #128c7e;
+  --color-wa-500: #25d366;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Supaya judul tidak tertutup header yang menempel saat diklik dari daftar isi. */
+  scroll-padding-top: 5rem;
+}
+
+body {
+  text-wrap: pretty;
+}
+
+h1, h2, h3 {
+  text-wrap: balance;
+}
+
+/*
+  Isi artikel ditulis dalam Markdown, jadi gayanya diatur di sini sekali saja.
+  Tidak memakai plugin typography supaya ukuran CSS tetap kecil.
+*/
+.isi-artikel {
+  @apply text-[1.0625rem] leading-relaxed text-wje-800;
+}
+.isi-artikel h2 {
+  @apply mt-12 mb-4 scroll-mt-24 text-2xl font-bold text-wje-950 sm:text-3xl;
+}
+.isi-artikel h3 {
+  @apply mt-8 mb-3 text-xl font-semibold text-wje-950;
+}
+.isi-artikel p {
+  @apply my-4;
+}
+.isi-artikel ul {
+  @apply my-4 list-disc space-y-2 pl-6;
+}
+.isi-artikel ol {
+  @apply my-4 list-decimal space-y-2 pl-6;
+}
+.isi-artikel a {
+  @apply font-medium text-aksen-600 underline underline-offset-4 hover:text-aksen-500;
+}
+.isi-artikel strong {
+  @apply font-semibold text-wje-950;
+}
+/* Tabel sering diambil Google untuk cuplikan, jadi dibuat rapi dan bisa digeser di HP. */
+.isi-artikel table {
+  @apply my-6 w-full border-collapse text-left text-sm;
+}
+.isi-artikel thead {
+  @apply bg-wje-100;
+}
+.isi-artikel th,
+.isi-artikel td {
+  @apply border border-wje-100 px-3 py-2 align-top;
+}
+.isi-artikel blockquote {
+  @apply my-6 border-l-4 border-aksen-400 bg-wje-50 px-5 py-3 text-wje-800;
+}
+.isi-artikel img {
+  @apply my-6 rounded-lg;
+}

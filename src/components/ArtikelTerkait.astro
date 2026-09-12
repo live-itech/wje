@@ -1,0 +1,44 @@
+---
+/**
+ * Blok "Artikel Terkait" di bagian bawah halaman uang.
+ *
+ * Ini setengah dari strategi internal link. Artikel menautkan ke atas menuju
+ * halaman uang, dan halaman uang menautkan balik ke bawah lewat blok ini.
+ * Maksimal enam, kalau lebih ganti yang paling lama.
+ *
+ * Efek sampingnya menguntungkan: isi halaman uang ikut berubah tiap bulan tanpa
+ * perlu menulis ulang halaman utamanya, dan Google membaca itu sebagai halaman
+ * yang terus dirawat.
+ */
+import { getCollection } from 'astro:content';
+
+type Props = { slugArtikel: readonly string[]; judul?: string };
+const { slugArtikel, judul = 'Artikel Terkait' } = Astro.props;
+
+const semua = await getCollection('blog', ({ data }) => !data.draft);
+const artikel = slugArtikel
+  .map((s) => semua.find((a) => a.id === s))
+  .filter((a) => a !== undefined)
+  .slice(0, 6);
+---
+
+{
+  artikel.length > 0 && (
+    <section class="mx-auto max-w-5xl px-4 py-14">
+      <h2 class="mb-6 text-2xl font-bold text-wje-950 sm:text-3xl">{judul}</h2>
+      <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {artikel.map((a) => (
+          <li>
+            <a
+              href={`/blog/${a.id}/`}
+              class="block h-full rounded-xl border border-wje-100 p-5 transition hover:border-aksen-400 hover:bg-wje-50"
+            >
+              <h3 class="font-semibold leading-snug text-wje-950">{a.data.judul}</h3>
+              <p class="mt-2 line-clamp-2 text-sm text-wje-600">{a.data.ringkas}</p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}

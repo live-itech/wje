@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TombolWA from '../components/TombolWA.astro';
+import { LAYANAN } from '../data/layanan';
+import { BISNIS } from '../data/bisnis';
+import { linkWA } from '../lib/wa';
+---
+
+<BaseLayout
+  title="Halaman Tidak Ditemukan | CV Wahyu Jaya Electric"
+  deskripsi="Halaman yang Anda cari tidak ada. Silakan pilih layanan kami atau hubungi WhatsApp."
+  path="/404/"
+  noindex
+>
+  <section class="mx-auto max-w-3xl px-4 py-20 text-center">
+    <p class="text-6xl font-extrabold text-wje-100">404</p>
+    <h1 class="mt-4 text-3xl font-extrabold text-wje-950">Halaman ini tidak ada</h1>
+    <p class="mt-4 text-lg text-wje-800">
+      Mungkin alamatnya salah ketik atau halamannya sudah dipindah. Silakan pilih layanan di bawah,
+      atau langsung tanya lewat WhatsApp.
+    </p>
+
+    <div class="mt-8">
+      <TombolWA
+        href={linkWA(`Halo ${BISNIS.nama}, saya ingin bertanya soal layanan Anda.`)}
+        posisi="404"
+      />
+    </div>
+
+    <ul class="mx-auto mt-10 grid max-w-xl gap-2 text-left sm:grid-cols-2">
+      {
+        LAYANAN.map((l) => (
+          <li>
+            <a href={`/${l.slug}/`} class="block rounded-lg px-3 py-2 text-wje-800 hover:bg-wje-50 hover:text-aksen-600">
+              {l.h1.split('—')[0].trim()}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>

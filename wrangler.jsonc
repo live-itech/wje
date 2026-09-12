@@ -1,0 +1,10 @@
+{
+  // PENTING: nilai "name" harus sama persis dengan nama Worker di dasbor
+  // Cloudflare. Kalau beda satu huruf, Workers Builds gagal tanpa pesan jelas.
+  "name": "wje-website",
+  "compatibility_date": "2026-09-12",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  }
+}

@@ -1,0 +1,65 @@
+---
+/**
+ * Galeri foto proyek.
+ *
+ * Foto diambil dari src/assets/portofolio/ supaya Astro mengubahnya menjadi WebP
+ * dan membuat beberapa ukuran secara otomatis. Ini yang menjaga halaman tetap
+ * cepat walaupun fotonya banyak.
+ *
+ * Selama PORTOFOLIO masih kosong, bagian ini tidak ditampilkan sama sekali.
+ * Lebih baik tidak ada galeri daripada galeri berisi foto milik perusahaan lain.
+ */
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import type { Proyek } from '../data/portofolio';
+
+type Props = { proyek: Proyek[]; judul?: string; maks?: number };
+const { proyek, judul = 'Proyek yang Sudah Kami Kerjakan', maks = 6 } = Astro.props;
+
+const berkas = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/portofolio/*.{jpg,jpeg,png,webp,avif}',
+  { eager: true },
+);
+
+/** Satu foto pertama dari tiap proyek, dipakai sebagai sampul. */
+const kartu = proyek
+  .slice(0, maks)
+  .map((p) => ({ proyek: p, gambar: berkas[`../assets/portofolio/${p.foto[0]}`]?.default }))
+  .filter((k) => k.gambar);
+---
+
+{
+  kartu.length > 0 && (
+    <section class="mx-auto max-w-6xl px-4 py-14">
+      <div class="mb-6 flex flex-wrap items-end justify-between gap-3">
+        <h2 class="text-2xl font-bold text-wje-950 sm:text-3xl">{judul}</h2>
+        <a href="/portofolio/" class="text-sm font-semibold text-aksen-600 hover:underline">
+          Lihat semua proyek
+        </a>
+      </div>
+
+      <ul class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {kartu.map(({ proyek: p, gambar }) => (
+          <li class="overflow-hidden rounded-xl border border-wje-100">
+            <a href={`/portofolio/${p.slug}/`}>
+              <Image
+                src={gambar!}
+                alt={`${p.judul} di ${p.lokasi}`}
+                widths={[400, 800]}
+                sizes="(max-width: 640px) 100vw, 33vw"
+                class="aspect-4/3 w-full object-cover"
+                loading="lazy"
+              />
+              <div class="p-4">
+                <h3 class="font-semibold leading-snug text-wje-950">{p.judul}</h3>
+                <p class="mt-1 text-sm text-wje-600">
+                  {p.spesifikasi} · {p.lokasi}, {p.tahun}
+                </p>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}

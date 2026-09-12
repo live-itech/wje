@@ -1,0 +1,3 @@
+# Dipakai nanti kalau ada alamat halaman yang berubah, supaya peringkat yang
+# sudah didapat tidak hilang. Format: /alamat-lama /alamat-baru 301
+# Aturan pengalihan diproses lebih dulu daripada _headers.

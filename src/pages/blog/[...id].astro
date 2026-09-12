@@ -1,0 +1,103 @@
+---
+/**
+ * Halaman artikel.
+ *
+ * Enam internal link wajib per artikel tidak dipasang otomatis di sini, kecuali
+ * yang di penutup. Empat yang lain harus ditulis di dalam kalimat pada berkas
+ * Markdown-nya, karena tautan yang berada di tengah kalimat jauh lebih bernilai
+ * daripada tautan yang ditumpuk di bawah halaman.
+ *
+ * Frontmatter `naikKe`, `samping`, dan `silang` bukan sekadar catatan. Skrip
+ * `npm run cek-data` memakainya untuk memastikan tautan itu benar-benar ada di
+ * dalam badan tulisan.
+ */
+import type { GetStaticPaths } from 'astro';
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Remah from '../../components/Remah.astro';
+import CTAPenutup from '../../components/CTAPenutup.astro';
+import { layananBySlug, PAYUNG_LABEL } from '../../data/layanan';
+import { BISNIS, belumDiisi } from '../../data/bisnis';
+import { linkWAArtikel } from '../../lib/wa';
+import { schemaArtikel, schemaRemah } from '../../lib/schema';
+
+export const getStaticPaths = (async () => {
+  const artikel = await getCollection('blog', ({ data }) => !data.draft);
+  return artikel.map((a) => ({ params: { id: a.id }, props: { artikel: a } }));
+}) satisfies GetStaticPaths;
+
+const { artikel } = Astro.props;
+const d = artikel.data;
+const { Content } = await render(artikel);
+
+const induk = layananBySlug(d.naikKe);
+const path = `/blog/${artikel.id}/`;
+
+const jalur = [
+  { nama: 'Beranda', url: '/' },
+  { nama: 'Artikel', url: '/blog/' },
+  { nama: d.judul, url: path },
+];
+
+const skema = [
+  schemaArtikel({
+    judul: d.judul,
+    deskripsi: d.deskripsi,
+    url: path,
+    terbit: d.terbit,
+    diperbarui: d.diperbarui,
+  }),
+  schemaRemah(jalur),
+].filter(Boolean);
+
+const tanggal = new Intl.DateTimeFormat('id-ID', { dateStyle: 'long' });
+const adaPenulis = !belumDiisi(BISNIS.penulis.nama);
+---
+
+<BaseLayout title={d.title} deskripsi={d.deskripsi} path={path} skema={skema}>
+  <Remah jalur={jalur} />
+
+  <article class="mx-auto max-w-3xl px-4 pb-10 pt-10">
+    <p class="mb-3 text-sm font-semibold uppercase tracking-wide text-aksen-600">
+      {PAYUNG_LABEL[d.payung]}
+    </p>
+    <h1 class="text-3xl font-extrabold leading-tight tracking-tight text-wje-950 sm:text-4xl">
+      {d.judul}
+    </h1>
+
+    <p class="mt-4 flex flex-wrap gap-x-3 gap-y-1 text-sm text-wje-600">
+      {adaPenulis && <span>Ditulis oleh {BISNIS.penulis.nama}, {BISNIS.penulis.jabatan}</span>}
+      <span>Terbit {tanggal.format(d.terbit)}</span>
+      {d.diperbarui && <span>Diperbarui {tanggal.format(d.diperbarui)}</span>}
+    </p>
+
+    <div class="isi-artikel mt-8">
+      <Content />
+    </div>
+  </article>
+
+  <!-- Tautan naik ke halaman uang induk. Ini tautan wajib nomor dua dari enam. -->
+  {
+    induk && (
+      <section class="mx-auto max-w-3xl px-4 py-8">
+        <div class="rounded-xl border-2 border-aksen-400 bg-wje-50 p-6">
+          <p class="mb-1 text-xs font-bold uppercase tracking-wide text-aksen-600">
+            Butuh dikerjakan, bukan sekadar tahu?
+          </p>
+          <h2 class="mb-2 text-xl font-bold text-wje-950">{induk.h1.split('—')[0].trim()}</h2>
+          <p class="mb-4 text-wje-800">{induk.ringkas}</p>
+          <a href={`/${induk.slug}/`} class="font-semibold text-aksen-600 underline underline-offset-4 hover:text-aksen-500">
+            Lihat layanan {induk.h1.split('—')[0].trim().toLowerCase()} kami
+          </a>
+        </div>
+      </section>
+    )
+  }
+
+  <CTAPenutup
+    hrefWA={linkWAArtikel(d.judul)}
+    judul="Masih ada yang ingin ditanyakan?"
+    isi="Kirim pertanyaan Anda lewat WhatsApp. Kami jawab langsung, tanpa perlu isi formulir panjang."
+    posisi="penutup-artikel"
+  />
+</BaseLayout>

@@ -1,0 +1,39 @@
+---
+/**
+ * Empat angka di atas lipatan layar.
+ *
+ * Angka yang belum diisi otomatis tidak ditampilkan, jadi lebih baik tampil tiga
+ * angka yang benar daripada empat angka yang satu di antaranya karangan.
+ */
+import { BISNIS, belumDiisi } from '../data/bisnis';
+
+const b = BISNIS.buktiCepat;
+
+const angka = [
+  { nilai: b.tahunPengalaman, satuan: 'Tahun', label: 'Pengalaman' },
+  { nilai: b.proyekSelesai, satuan: 'Proyek', label: 'Selesai dikerjakan' },
+  { nilai: b.jumlahKota, satuan: 'Kota', label: 'Area layanan' },
+  { nilai: b.garansiBulan, satuan: 'Bulan', label: 'Garansi pekerjaan' },
+].filter((a) => !belumDiisi(a.nilai));
+---
+
+{
+  angka.length > 0 && (
+    <section class="border-y border-wje-100 bg-wje-50">
+      <dl class="mx-auto grid max-w-6xl grid-cols-2 gap-px overflow-hidden px-4 py-6 sm:grid-cols-4 sm:gap-6">
+        {angka.map((a) => (
+          <div class="px-2 py-2 text-center sm:text-left">
+            <dt class="sr-only">{a.label}</dt>
+            <dd>
+              <span class="block text-2xl font-extrabold tracking-tight text-wje-950 sm:text-3xl">
+                {a.nilai}
+                <span class="ml-1 text-sm font-semibold text-aksen-600">{a.satuan}</span>
+              </span>
+              <span class="mt-0.5 block text-xs text-wje-600">{a.label}</span>
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+  )
+}

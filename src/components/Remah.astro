@@ -1,0 +1,26 @@
+---
+/** Jejak navigasi. Skema BreadcrumbList-nya dipasang oleh halaman, bukan di sini. */
+import type { Remah } from '../lib/schema';
+
+type Props = { jalur: Remah[] };
+const { jalur } = Astro.props;
+---
+
+<nav aria-label="Jejak navigasi" class="border-b border-wje-100 bg-wje-50">
+  <ol class="mx-auto flex max-w-6xl flex-wrap items-center gap-x-2 gap-y-1 px-4 py-2.5 text-xs text-wje-600">
+    {
+      jalur.map((r, i) => (
+        <li class="flex items-center gap-2">
+          {i > 0 && <span aria-hidden="true">/</span>}
+          {i === jalur.length - 1 ? (
+            <span class="font-medium text-wje-800">{r.nama}</span>
+          ) : (
+            <a href={r.url} class="hover:text-aksen-600">
+              {r.nama}
+            </a>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+</nav>

@@ -1,0 +1,104 @@
+---
+import { BISNIS } from '../data/bisnis';
+import { LAYANAN, PAYUNG_LABEL, type Payung } from '../data/layanan';
+import { linkWA } from '../lib/wa';
+
+// Menu dibangun dari data, jadi kalau halaman uang bertambah menunya ikut sendiri.
+const payungUrut: Payung[] = ['crane', 'lift', 'elektrik'];
+const menu = payungUrut.map((p) => ({
+  label: PAYUNG_LABEL[p],
+  item: LAYANAN.filter((l) => l.payung === p),
+}));
+
+const waHeader = linkWA(`Halo ${BISNIS.nama}, saya ingin bertanya soal layanan Anda.`);
+---
+
+<header class="sticky top-0 z-40 border-b border-wje-100 bg-white/95 backdrop-blur">
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
+    <a href="/" class="flex items-center gap-2.5" aria-label={`Beranda ${BISNIS.nama}`}>
+      <img src="/logo-wje.png" alt="" width="44" height="44" class="h-10 w-auto" />
+      <span class="leading-tight">
+        <span class="block text-base font-extrabold tracking-tight text-wje-950">
+          Wahyu Jaya Electric
+        </span>
+        <span class="block text-[11px] font-medium text-wje-600">
+          Crane · Lift Barang · Listrik Industri
+        </span>
+      </span>
+    </a>
+
+    <nav class="hidden items-center gap-1 lg:flex" aria-label="Menu utama">
+      {
+        menu.map((grup) => (
+          <div class="group relative">
+            <button
+              type="button"
+              class="rounded px-3 py-2 text-sm font-medium text-wje-800 hover:text-aksen-600"
+            >
+              {grup.label}
+            </button>
+            <div class="invisible absolute left-0 top-full w-72 rounded-lg border border-wje-100 bg-white p-2 opacity-0 shadow-lg transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+              {grup.item.map((l) => (
+                <a
+                  href={`/${l.slug}/`}
+                  class="block rounded px-3 py-2 text-sm text-wje-800 hover:bg-wje-50 hover:text-aksen-600"
+                >
+                  <span class="block font-medium">{l.h1.split('—')[0].trim()}</span>
+                  <span class="block text-xs text-wje-600">{l.ringkas}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+      <a href="/portofolio/" class="rounded px-3 py-2 text-sm font-medium hover:text-aksen-600">
+        Portofolio
+      </a>
+      <a href="/blog/" class="rounded px-3 py-2 text-sm font-medium hover:text-aksen-600">
+        Artikel
+      </a>
+      <a href="/tentang-kami/" class="rounded px-3 py-2 text-sm font-medium hover:text-aksen-600">
+        Tentang
+      </a>
+    </nav>
+
+    <a
+      href={waHeader}
+      rel="noopener"
+      target="_blank"
+      data-wa="header"
+      class="hidden shrink-0 rounded-lg bg-wa-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-wa-600/90 sm:inline-block"
+    >
+      WhatsApp {BISNIS.kontak.waTampil}
+    </a>
+
+    <details class="lg:hidden">
+      <summary
+        class="list-none rounded-lg border border-wje-100 px-3 py-2 text-sm font-medium"
+        aria-label="Buka menu"
+      >
+        Menu
+      </summary>
+      <div class="absolute left-0 right-0 top-full border-b border-wje-100 bg-white p-4 shadow-lg">
+        {
+          menu.map((grup) => (
+            <div class="mb-4">
+              <p class="mb-1 text-xs font-bold uppercase tracking-wide text-wje-600">
+                {grup.label}
+              </p>
+              {grup.item.map((l) => (
+                <a href={`/${l.slug}/`} class="block py-1.5 text-sm text-wje-800">
+                  {l.h1.split('—')[0].trim()}
+                </a>
+              ))}
+            </div>
+          ))
+        }
+        <a href="/portofolio/" class="block py-1.5 text-sm font-medium">Portofolio</a>
+        <a href="/blog/" class="block py-1.5 text-sm font-medium">Artikel</a>
+        <a href="/tentang-kami/" class="block py-1.5 text-sm font-medium">Tentang Kami</a>
+        <a href="/kontak/" class="block py-1.5 text-sm font-medium">Kontak</a>
+      </div>
+    </details>
+  </div>
+</header>

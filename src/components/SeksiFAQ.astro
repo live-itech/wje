@@ -1,0 +1,40 @@
+---
+/**
+ * Bagian tanya jawab.
+ *
+ * Dipakai bersama schemaFaq() di halaman pemanggil. Daftar yang masuk ke sini
+ * sudah disaring faqByIds(), jadi jawaban yang belum diisi tidak akan tampil dan
+ * tidak akan ikut ke data terstruktur.
+ *
+ * Memakai details/summary bawaan HTML, bukan JavaScript. Isi pertanyaannya tetap
+ * terbaca oleh Google walaupun tertutup.
+ */
+import type { Faq } from '../data/faq';
+
+type Props = { daftar: Faq[]; judul?: string };
+const { daftar, judul = 'Pertanyaan yang Sering Diajukan' } = Astro.props;
+---
+
+{
+  daftar.length > 0 && (
+    <section class="mx-auto max-w-3xl px-4 py-14">
+      <h2 class="mb-6 text-2xl font-bold text-wje-950 sm:text-3xl">{judul}</h2>
+      <div class="divide-y divide-wje-100 border-y border-wje-100">
+        {daftar.map((f) => (
+          <details class="group py-4">
+            <summary class="flex cursor-pointer list-none items-start justify-between gap-4 font-semibold text-wje-950">
+              <span>{f.tanya}</span>
+              <span
+                class="mt-0.5 shrink-0 text-aksen-600 transition group-open:rotate-45"
+                aria-hidden="true"
+              >
+                +
+              </span>
+            </summary>
+            <p class="mt-3 leading-relaxed text-wje-800">{f.jawab}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+  )
+}

@@ -1,0 +1,59 @@
+---
+/** Kotak ajakan di penutup halaman. Wajib ada di setiap halaman uang dan artikel. */
+import TombolWA from './TombolWA.astro';
+import { BISNIS, belumDiisi } from '../data/bisnis';
+import { TELEPON_HREF } from '../lib/wa';
+
+type Props = {
+  judul?: string;
+  isi?: string;
+  hrefWA: string;
+  labelWA?: string;
+  posisi?: string;
+};
+
+const {
+  judul = 'Butuh penawaran atau sekadar ingin bertanya?',
+  isi = 'Kirim pesan lewat WhatsApp. Survey lokasi gratis dan tidak ada kewajiban melanjutkan.',
+  hrefWA,
+  labelWA = 'Chat WhatsApp Sekarang',
+  posisi = 'penutup',
+} = Astro.props;
+
+const punyaMaps = !belumDiisi(BISNIS.alamat.googleMapsUrl);
+---
+
+<section class="bg-wje-950 py-14 text-white">
+  <div class="mx-auto max-w-3xl px-4 text-center">
+    <h2 class="text-2xl font-bold sm:text-3xl">{judul}</h2>
+    <p class="mx-auto mt-3 max-w-xl text-wje-300">{isi}</p>
+
+    <div class="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
+      <TombolWA href={hrefWA} label={labelWA} posisi={posisi} />
+      <a
+        href={TELEPON_HREF}
+        data-wa={`telepon-${posisi}`}
+        class="inline-flex items-center justify-center rounded-xl border-2 border-white/30 px-7 py-4 text-base font-bold text-white transition hover:border-white"
+      >
+        Telepon {BISNIS.kontak.waTampil}
+      </a>
+    </div>
+
+    <p class="mt-6 text-sm text-wje-300">
+      {BISNIS.jamBukaTampil}. {BISNIS.catatanJam}
+    </p>
+    <p class="mt-1 text-sm text-wje-300">
+      Melayani {BISNIS.areaLayanan.join(', ')}.
+    </p>
+
+    {
+      punyaMaps && (
+        <p class="mt-4 text-sm">
+          <a href={BISNIS.alamat.googleMapsUrl} target="_blank" rel="noopener" class="underline hover:text-aksen-400">
+            Lihat lokasi kami di Google Maps
+          </a>
+        </p>
+      )
+    }
+  </div>
+</section>

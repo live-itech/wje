@@ -1,0 +1,132 @@
+---
+/**
+ * Halaman kontak.
+ *
+ * Sengaja tidak memakai formulir panjang. Di pasar ini hampir semua calon
+ * pelanggan memilih WhatsApp, dan formulir bertingkat justru menurunkan jumlah
+ * yang menghubungi. Formulir kontak disediakan nanti hanya kalau ada permintaan.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Remah from '../components/Remah.astro';
+import TombolWA from '../components/TombolWA.astro';
+import { BISNIS, belumDiisi } from '../data/bisnis';
+import { LAYANAN } from '../data/layanan';
+import { linkWA, TELEPON_HREF } from '../lib/wa';
+import { schemaRemah } from '../lib/schema';
+
+const a = BISNIS.alamat;
+const barisAlamat = [a.jalan, a.kelurahan, a.kecamatan, `${a.kota}, ${a.provinsi}`, a.kodePos]
+  .filter((v) => v && !belumDiisi(v))
+  .join(', ');
+
+const punyaMaps = !belumDiisi(a.googleMapsUrl);
+const punyaEmail = !belumDiisi(BISNIS.kontak.email);
+
+const jalur = [
+  { nama: 'Beranda', url: '/' },
+  { nama: 'Kontak', url: '/kontak/' },
+];
+
+const wa = linkWA(`Halo ${BISNIS.nama}, saya ingin bertanya soal layanan Anda.`);
+---
+
+<BaseLayout
+  title="Kontak CV Wahyu Jaya Electric Surabaya"
+  deskripsi="Hubungi CV Wahyu Jaya Electric di Surabaya lewat WhatsApp atau telepon untuk hoist crane, lift barang, dan instalasi listrik. Survey lokasi gratis."
+  path="/kontak/"
+  skema={[schemaRemah(jalur)]}
+>
+  <Remah jalur={jalur} />
+
+  <section class="mx-auto max-w-4xl px-4 pb-10 pt-12">
+    <h1 class="text-3xl font-extrabold tracking-tight text-wje-950 sm:text-4xl">
+      Hubungi {BISNIS.nama}
+    </h1>
+    <p class="mt-4 max-w-2xl text-lg text-wje-800">
+      Cara tercepat adalah WhatsApp. Sebutkan jenis pekerjaan dan lokasi Anda, nanti kami balas
+      dengan perkiraan langkah berikutnya. Survey lokasi gratis dan tidak ada kewajiban melanjutkan.
+    </p>
+
+    <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+      <TombolWA href={wa} posisi="kontak-utama" />
+      <a
+        href={TELEPON_HREF}
+        data-wa="telepon-kontak"
+        class="inline-flex items-center justify-center rounded-xl border-2 border-wje-950 px-7 py-4 text-base font-bold text-wje-950 transition hover:bg-wje-950 hover:text-white"
+      >
+        Telepon {BISNIS.kontak.waTampil}
+      </a>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-4xl px-4 py-8">
+    <dl class="grid gap-6 sm:grid-cols-2">
+      <div class="rounded-xl border border-wje-100 p-5">
+        <dt class="text-sm font-bold uppercase tracking-wide text-wje-600">WhatsApp dan Telepon</dt>
+        <dd class="mt-2 text-lg font-semibold text-wje-950">{BISNIS.kontak.waTampil}</dd>
+      </div>
+
+      {
+        punyaEmail && (
+          <div class="rounded-xl border border-wje-100 p-5">
+            <dt class="text-sm font-bold uppercase tracking-wide text-wje-600">Email</dt>
+            <dd class="mt-2 text-lg font-semibold text-wje-950">{BISNIS.kontak.email}</dd>
+          </div>
+        )
+      }
+
+      {
+        barisAlamat && (
+          <div class="rounded-xl border border-wje-100 p-5">
+            <dt class="text-sm font-bold uppercase tracking-wide text-wje-600">Alamat Workshop</dt>
+            <dd class="mt-2 text-wje-800">{barisAlamat}</dd>
+          </div>
+        )
+      }
+
+      <div class="rounded-xl border border-wje-100 p-5">
+        <dt class="text-sm font-bold uppercase tracking-wide text-wje-600">Jam Kerja</dt>
+        <dd class="mt-2 text-wje-800">{BISNIS.jamBukaTampil}</dd>
+        <dd class="mt-1 text-sm text-wje-600">{BISNIS.catatanJam}</dd>
+      </div>
+
+      <div class="rounded-xl border border-wje-100 p-5 sm:col-span-2">
+        <dt class="text-sm font-bold uppercase tracking-wide text-wje-600">Area Layanan</dt>
+        <dd class="mt-2 text-wje-800">{BISNIS.areaLayanan.join(', ')}</dd>
+      </div>
+    </dl>
+
+    {
+      punyaMaps && (
+        <p class="mt-6">
+          <a
+            href={a.googleMapsUrl}
+            target="_blank"
+            rel="noopener"
+            class="font-semibold text-aksen-600 underline underline-offset-4"
+          >
+            Buka lokasi kami di Google Maps
+          </a>
+        </p>
+      )
+    }
+  </section>
+
+  <section class="mx-auto max-w-4xl px-4 py-10">
+    <h2 class="mb-5 text-xl font-bold text-wje-950">Langsung ke Layanan yang Anda Cari</h2>
+    <ul class="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        LAYANAN.map((l) => (
+          <li>
+            <a
+              href={`/${l.slug}/`}
+              class="block rounded-lg border border-wje-100 px-4 py-3 text-sm font-medium text-wje-800 hover:border-aksen-400 hover:text-aksen-600"
+            >
+              {l.h1.split('—')[0].trim()}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>

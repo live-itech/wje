@@ -1,0 +1,106 @@
+/**
+ * SATU-SATUNYA sumber data usaha.
+ *
+ * Nomor WhatsApp, alamat, dan jam buka TIDAK BOLEH ditulis ulang di komponen
+ * atau halaman manapun. Semua ambil dari sini. Alasannya: data ini harus sama
+ * persis dengan yang tertulis di Google Business Profile. Beda satu huruf saja
+ * melemahkan peringkat di Google Maps.
+ *
+ * Nilai bertanda PERLU_DIISI belum dikonfirmasi ke pemilik usaha.
+ * Jalankan `npm run cek-data` untuk melihat daftarnya.
+ */
+
+export const PERLU_DIISI = 'PERLU_DIISI' as const;
+
+export const BISNIS = {
+  nama: 'CV Wahyu Jaya Electric',
+  namaPendek: 'WJE',
+  tagline: 'Hoist Crane, Lift Barang, dan Instalasi Listrik Industri di Surabaya',
+
+  // Dipakai sebagai penulis artikel. Google menilai kepakaran penulis, dan untuk
+  // topik teknis kelistrikan ini berpengaruh. Jangan pakai "admin".
+  penulis: {
+    nama: PERLU_DIISI, // nama lengkap ayah
+    jabatan: PERLU_DIISI, // contoh: "Pemilik & Teknisi Utama"
+    pengalamanTahun: PERLU_DIISI, // contoh: 15
+  },
+
+  berdiriTahun: PERLU_DIISI, // contoh: 2009
+
+  kontak: {
+    // Format lokal untuk ditampilkan ke pembaca.
+    waTampil: '0821-3226-6598',
+    // Format internasional untuk link wa.me. Tanpa tanda plus, tanpa spasi.
+    waInternasional: '6282132266598',
+    telepon: '+62 821-3226-6598',
+    email: PERLU_DIISI,
+  },
+
+  alamat: {
+    jalan: PERLU_DIISI,
+    kelurahan: PERLU_DIISI,
+    kecamatan: PERLU_DIISI,
+    kota: 'Surabaya',
+    provinsi: 'Jawa Timur',
+    kodePos: PERLU_DIISI,
+    negara: 'ID',
+    // Ambil dari Google Maps setelah Google Business Profile terverifikasi.
+    lat: PERLU_DIISI,
+    lng: PERLU_DIISI,
+    // Tempel URL Google Maps milik usaha di sini setelah GBP jadi.
+    googleMapsUrl: PERLU_DIISI,
+  },
+
+  /** Ditulis dalam format yang dipakai schema.org. */
+  jamBuka: [
+    { hari: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], buka: '08:00', tutup: '17:00' },
+    { hari: ['Saturday'], buka: '08:00', tutup: '15:00' },
+  ],
+  jamBukaTampil: 'Senin sampai Jumat 08.00 - 17.00, Sabtu 08.00 - 15.00',
+  catatanJam: 'Panggilan darurat crane dan listrik dilayani di luar jam kerja.',
+
+  /** Kota yang dilayani. Dipakai untuk schema areaServed dan halaman area. */
+  areaLayanan: [
+    'Surabaya',
+    'Sidoarjo',
+    'Gresik',
+    'Mojokerto',
+    'Pasuruan',
+  ],
+
+  /**
+   * Legalitas yang boleh ditampilkan. Ini menaikkan kepercayaan pembeli pabrik
+   * secara drastis. Hapus baris yang tidak dimiliki, jangan dikarang.
+   */
+  legalitas: [
+    { nama: 'NIB', nomor: PERLU_DIISI },
+    { nama: 'SIUJK', nomor: PERLU_DIISI },
+    { nama: 'SBU', nomor: PERLU_DIISI },
+    { nama: 'Sertifikat AK3 Listrik', nomor: PERLU_DIISI },
+  ],
+
+  /** Empat angka yang tampil di bagian bukti cepat setiap halaman. */
+  buktiCepat: {
+    tahunPengalaman: PERLU_DIISI,
+    proyekSelesai: PERLU_DIISI,
+    jumlahKota: 5,
+    garansiBulan: PERLU_DIISI,
+  },
+
+  sosial: {
+    instagram: PERLU_DIISI,
+    facebook: PERLU_DIISI,
+  },
+} as const;
+
+export const SITUS = {
+  domain: 'https://wahyujayaelectric.com',
+  bahasa: 'id-ID',
+  // Isi setelah properti dibuat di Search Console dan Analytics.
+  gaId: PERLU_DIISI,
+} as const;
+
+/** Dipakai komponen dan skrip cek-data untuk tahu nilai mana yang belum diisi. */
+export function belumDiisi(nilai: unknown): boolean {
+  return nilai === PERLU_DIISI;
+}

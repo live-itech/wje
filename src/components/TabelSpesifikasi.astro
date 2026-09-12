@@ -1,0 +1,35 @@
+---
+/**
+ * Tabel spesifikasi. Baris yang nilainya belum diisi disembunyikan.
+ * Tabel sering diambil Google untuk cuplikan di hasil pencarian, jadi
+ * strukturnya dijaga tetap tabel betulan, bukan daftar yang dibuat mirip tabel.
+ */
+import { belumDiisi } from '../data/bisnis';
+
+type Props = { judul: string; baris: readonly { label: string; nilai: string }[] };
+const { judul, baris } = Astro.props;
+
+const tampil = baris.filter((b) => !belumDiisi(b.nilai));
+---
+
+{
+  tampil.length > 0 && (
+    <section class="mx-auto max-w-3xl px-4 py-10">
+      <h2 class="mb-5 text-2xl font-bold text-wje-950 sm:text-3xl">{judul}</h2>
+      <div class="overflow-x-auto rounded-lg border border-wje-100">
+        <table class="w-full text-left text-sm">
+          <tbody class="divide-y divide-wje-100">
+            {tampil.map((b) => (
+              <tr>
+                <th scope="row" class="w-2/5 bg-wje-50 px-4 py-3 font-semibold text-wje-950">
+                  {b.label}
+                </th>
+                <td class="px-4 py-3 text-wje-800">{b.nilai}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  )
+}

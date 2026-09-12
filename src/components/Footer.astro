@@ -1,0 +1,83 @@
+---
+import { BISNIS, belumDiisi } from '../data/bisnis';
+import { LAYANAN, PAYUNG_LABEL, type Payung } from '../data/layanan';
+import { linkWA } from '../lib/wa';
+
+const payungUrut: Payung[] = ['crane', 'lift', 'elektrik'];
+const tahun = new Date().getFullYear();
+const a = BISNIS.alamat;
+
+// Baris alamat disusun dari bagian yang sudah terisi saja, supaya tidak muncul
+// penanda PERLU_DIISI di halaman yang terbit.
+const barisAlamat = [a.jalan, a.kelurahan, a.kecamatan, `${a.kota}, ${a.provinsi}`, a.kodePos]
+  .filter((v) => v && !belumDiisi(v))
+  .join(', ');
+
+const legalitasTampil = BISNIS.legalitas.filter((l) => !belumDiisi(l.nomor));
+---
+
+<footer class="mt-20 border-t border-wje-100 bg-wje-950 text-wje-300">
+  <div class="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="sm:col-span-2 lg:col-span-1">
+      <img src="/logo-wje-putih.png" alt={BISNIS.nama} width="120" height="52" class="mb-4 h-12 w-auto" />
+      <p class="text-sm leading-relaxed">{BISNIS.tagline}</p>
+      <p class="mt-4 text-sm">
+        Melayani {BISNIS.areaLayanan.join(', ')}.
+      </p>
+    </div>
+
+    {
+      payungUrut.map((p) => (
+        <div>
+          <p class="mb-3 text-sm font-bold text-white">{PAYUNG_LABEL[p]}</p>
+          <ul class="space-y-2 text-sm">
+            {LAYANAN.filter((l) => l.payung === p).map((l) => (
+              <li>
+                <a href={`/${l.slug}/`} class="hover:text-white">
+                  {l.h1.split('—')[0].trim()}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="border-t border-white/10">
+    <div class="mx-auto grid max-w-6xl gap-6 px-4 py-10 sm:grid-cols-2">
+      <div>
+        <p class="mb-2 text-sm font-bold text-white">{BISNIS.nama}</p>
+        {barisAlamat && <p class="text-sm">{barisAlamat}</p>}
+        <p class="mt-2 text-sm">
+          WhatsApp:
+          <a href={linkWA()} target="_blank" rel="noopener" data-wa="footer" class="font-semibold text-white hover:underline">
+            {BISNIS.kontak.waTampil}
+          </a>
+        </p>
+        <p class="mt-1 text-sm">{BISNIS.jamBukaTampil}</p>
+        <p class="mt-1 text-sm text-wje-600">{BISNIS.catatanJam}</p>
+      </div>
+
+      <div class="sm:text-right">
+        <ul class="space-y-2 text-sm">
+          <li><a href="/tentang-kami/" class="hover:text-white">Tentang Kami</a></li>
+          <li><a href="/portofolio/" class="hover:text-white">Portofolio</a></li>
+          <li><a href="/blog/" class="hover:text-white">Artikel</a></li>
+          <li><a href="/kontak/" class="hover:text-white">Kontak</a></li>
+        </ul>
+        {
+          legalitasTampil.length > 0 && (
+            <p class="mt-4 text-xs text-wje-600">
+              {legalitasTampil.map((l) => `${l.nama} ${l.nomor}`).join(' · ')}
+            </p>
+          )
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="border-t border-white/10 py-5 text-center text-xs text-wje-600">
+    &copy; {tahun} {BISNIS.nama}. Seluruh hak dilindungi.
+  </div>
+</footer>

@@ -1,0 +1,131 @@
+---
+/**
+ * Beranda.
+ *
+ * Tugas beranda di web jasa seperti ini bukan menjelaskan panjang lebar, tapi
+ * menyalurkan pengunjung ke halaman uang yang tepat secepat mungkin, sambil
+ * memberi tautan ke kesembilan halaman itu dari satu tempat.
+ */
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BuktiCepat from '../components/BuktiCepat.astro';
+import TombolWA from '../components/TombolWA.astro';
+import ProsesKerja from '../components/ProsesKerja.astro';
+import GaleriProyek from '../components/GaleriProyek.astro';
+import SeksiTestimoni from '../components/SeksiTestimoni.astro';
+import SeksiFAQ from '../components/SeksiFAQ.astro';
+import CTAPenutup from '../components/CTAPenutup.astro';
+
+import { BISNIS } from '../data/bisnis';
+import { LAYANAN, PAYUNG_LABEL, type Payung } from '../data/layanan';
+import { faqByIds } from '../data/faq';
+import { PORTOFOLIO } from '../data/portofolio';
+import { TESTIMONI } from '../data/testimoni';
+import { linkWA, TELEPON_HREF } from '../lib/wa';
+import { HERO_BERANDA, ILUSTRASI, ALT_ILUSTRASI } from '../lib/ilustrasi';
+
+const payungUrut: Payung[] = ['crane', 'lift', 'elektrik'];
+const wa = linkWA(`Halo ${BISNIS.nama}, saya ingin bertanya soal layanan Anda.`);
+
+// FAQ beranda diambil dari pertanyaan yang berlaku untuk semua lini.
+const daftarFaq = faqByIds([
+  'crane-luar-kota',
+  'listrik-survey',
+  'crane-bangunan-lama',
+  'harga-crane-penawaran',
+]);
+---
+
+<BaseLayout
+  title="Hoist Crane, Lift Barang & Listrik Industri Surabaya"
+  deskripsi="CV Wahyu Jaya Electric: instalasi hoist crane, pembuatan lift barang, dan instalasi listrik pabrik di Surabaya dan sekitarnya. Survey gratis, hubungi WhatsApp."
+  path="/"
+>
+  <!-- Hero. Gambar latar dimuat eager karena ini gambar terbesar yang pertama
+       terlihat, dan waktu munculnya ikut dinilai Google sebagai ukuran kecepatan. -->
+  <section class="relative isolate overflow-hidden bg-wje-950">
+    <Image
+      src={HERO_BERANDA}
+      alt=""
+      widths={[640, 1024, 1600]}
+      sizes="100vw"
+      class="absolute inset-0 -z-10 h-full w-full object-cover opacity-35"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="absolute inset-0 -z-10 bg-linear-to-b from-wje-950/80 via-wje-950/70 to-wje-950/90"></div>
+
+    <div class="mx-auto max-w-4xl px-4 pb-16 pt-16 text-center sm:pt-24">
+      <p class="mb-4 text-sm font-semibold uppercase tracking-wide text-aksen-400">
+        Melayani {BISNIS.areaLayanan.join(' · ')}
+      </p>
+      <h1 class="text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl">
+        Hoist Crane, Lift Barang, dan Instalasi Listrik Industri di Surabaya
+      </h1>
+      <p class="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-wje-300">
+        {BISNIS.nama} mengerjakan instalasi dan fabrikasi hoist crane, pembuatan lift barang, serta
+        pekerjaan kelistrikan pabrik dan bangunan usaha. Survey lokasi gratis, penawaran tertulis,
+        dikerjakan tim sendiri.
+      </p>
+
+      <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <TombolWA href={wa} posisi="beranda-hero" label="Tanya Lewat WhatsApp" />
+        <a
+          href={TELEPON_HREF}
+          data-wa="telepon-beranda"
+          class="inline-flex items-center justify-center rounded-xl border-2 border-white/40 px-7 py-4 text-base font-bold text-white transition hover:border-white hover:bg-white hover:text-wje-950"
+        >
+          Telepon {BISNIS.kontak.waTampil}
+        </a>
+      </div>
+      <p class="mt-4 text-sm text-wje-300">{BISNIS.jamBukaTampil}. {BISNIS.catatanJam}</p>
+    </div>
+  </section>
+
+  <BuktiCepat />
+
+  <!-- Tiga payung layanan, menautkan ke kesembilan halaman uang -->
+  <section class="mx-auto max-w-6xl px-4 py-16">
+    <h2 class="mb-2 text-2xl font-bold text-wje-950 sm:text-3xl">Tiga Bidang yang Kami Kerjakan</h2>
+    <p class="mb-10 text-wje-600">Pilih yang paling mendekati kebutuhan Anda.</p>
+
+    <div class="grid gap-6 lg:grid-cols-3">
+      {
+        payungUrut.map((p) => (
+          <div class="overflow-hidden rounded-2xl border border-wje-100">
+            <Image
+              src={ILUSTRASI[p]}
+              alt={ALT_ILUSTRASI[p]}
+              widths={[400, 800]}
+              sizes="(max-width: 1024px) 100vw, 33vw"
+              class="aspect-16/10 w-full object-cover"
+              loading="lazy"
+            />
+            <div class="p-6">
+            <h3 class="mb-4 text-xl font-bold text-wje-950">{PAYUNG_LABEL[p]}</h3>
+            <ul class="space-y-3">
+              {LAYANAN.filter((l) => l.payung === p).map((l) => (
+                <li>
+                  <a href={`/${l.slug}/`} class="group block">
+                    <span class="block font-semibold text-wje-800 group-hover:text-aksen-600">
+                      {l.h1.split('—')[0].trim()}
+                    </span>
+                    <span class="mt-0.5 block text-sm text-wje-600">{l.ringkas}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <GaleriProyek proyek={PORTOFOLIO} judul="Proyek Terbaru Kami" />
+  <ProsesKerja />
+  <SeksiTestimoni daftar={TESTIMONI} />
+  <SeksiFAQ daftar={daftarFaq} judul="Pertanyaan yang Sering Masuk" />
+
+  <CTAPenutup hrefWA={wa} posisi="penutup-beranda" />
+</BaseLayout>

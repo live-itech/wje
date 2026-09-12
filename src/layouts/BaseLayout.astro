@@ -1,0 +1,96 @@
+---
+/**
+ * Kerangka dasar semua halaman.
+ *
+ * Di sinilah seluruh meta tag dan data terstruktur dipasang, supaya tidak ada
+ * halaman yang lupa memasangnya. Halaman cukup mengirim judul, deskripsi, dan
+ * skema tambahan miliknya sendiri.
+ */
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import TombolWAMelayang from '../components/TombolWAMelayang.astro';
+import { BISNIS, SITUS } from '../data/bisnis';
+import { schemaBisnis } from '../lib/schema';
+
+type Props = {
+  /** Maksimal 60 karakter. */
+  title: string;
+  /** Maksimal 155 karakter. */
+  deskripsi: string;
+  /** Alamat halaman diawali dan diakhiri garis miring, contoh: /hoist-crane-surabaya/ */
+  path: string;
+  /** Skema JSON-LD tambahan milik halaman ini. */
+  skema?: unknown[];
+  /** Halaman yang belum siap terbit, misalnya halaman uji coba. */
+  noindex?: boolean;
+  gambarOg?: string;
+};
+
+const { title, deskripsi, path, skema = [], noindex = false, gambarOg } = Astro.props;
+
+const kanonik = new URL(path, SITUS.domain).href;
+const og = new URL(gambarOg ?? '/og-default.jpg', SITUS.domain).href;
+
+// LocalBusiness dipasang sekali di setiap halaman dengan @id tetap, sehingga
+// skema layanan dan artikel cukup merujuk ke @id itu tanpa menyalin ulang datanya.
+const semuaSkema = [schemaBisnis(), ...skema].filter(Boolean);
+---
+
+<!doctype html>
+<html lang={SITUS.bahasa} class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={deskripsi} />
+    <link rel="canonical" href={kanonik} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <meta name="geo.region" content="ID-JI" />
+    <meta name="geo.placename" content={BISNIS.alamat.kota} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="id_ID" />
+    <meta property="og:site_name" content={BISNIS.nama} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={deskripsi} />
+    <meta property="og:url" content={kanonik} />
+    <meta property="og:image" content={og} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/icon-512.png" type="image/png" sizes="512x512" />
+    <link rel="apple-touch-icon" href="/icon-512.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    />
+
+    {
+      semuaSkema.map((s) => (
+        <script type="application/ld+json" set:html={JSON.stringify(s)} />
+      ))
+    }
+  </head>
+
+  <body class="flex min-h-screen flex-col bg-white font-sans text-wje-800 antialiased">
+    <a
+      href="#isi"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-wje-950 focus:px-4 focus:py-2 focus:text-white"
+    >
+      Lompat ke isi
+    </a>
+
+    <Header />
+    <main id="isi" class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+    <TombolWAMelayang />
+  </body>
+</html>

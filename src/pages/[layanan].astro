@@ -1,0 +1,191 @@
+---
+/**
+ * Sembilan halaman uang, dibangun dari src/data/layanan.ts.
+ *
+ * Susunannya mengikuti kerangka di RENCANA-WEBSITE-SEO-WJE.md bagian 4, urut dari
+ * yang paling menentukan konversi: judul, pembuka, tombol WhatsApp di atas lipatan
+ * layar, baru bukti, spesifikasi, foto, proses, harga, testimoni, FAQ, penutup.
+ *
+ * Semuanya satu berkas karena kesembilan halaman wajib seragam. Kalau tiap halaman
+ * dibuat terpisah, cepat atau lambat ada yang lupa memasang FAQ atau blok artikel
+ * terkait, dan halaman itu langsung tertinggal peringkatnya.
+ */
+import type { GetStaticPaths } from 'astro';
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Remah from '../components/Remah.astro';
+import BuktiCepat from '../components/BuktiCepat.astro';
+import TombolWA from '../components/TombolWA.astro';
+import TabelSpesifikasi from '../components/TabelSpesifikasi.astro';
+import ProsesKerja from '../components/ProsesKerja.astro';
+import GaleriProyek from '../components/GaleriProyek.astro';
+import SeksiTestimoni from '../components/SeksiTestimoni.astro';
+import SeksiFAQ from '../components/SeksiFAQ.astro';
+import ArtikelTerkait from '../components/ArtikelTerkait.astro';
+import CTAPenutup from '../components/CTAPenutup.astro';
+
+import { LAYANAN, layananBySlug, PAYUNG_LABEL } from '../data/layanan';
+import { faqByIds } from '../data/faq';
+import { portofolioByPayung } from '../data/portofolio';
+import { testimoniByLayanan } from '../data/testimoni';
+import { BISNIS } from '../data/bisnis';
+import { linkWALayanan, linkWAHarga, TELEPON_HREF } from '../lib/wa';
+import { schemaLayanan, schemaFaq, schemaRemah } from '../lib/schema';
+import { ILUSTRASI, ALT_ILUSTRASI } from '../lib/ilustrasi';
+
+export const getStaticPaths = (() =>
+  LAYANAN.map((l) => ({ params: { layanan: l.slug } }))) satisfies GetStaticPaths;
+
+const { layanan: slug } = Astro.params;
+const l = layananBySlug(slug!)!;
+
+const namaPendek = l.h1.split('—')[0].trim();
+const waUtama = linkWALayanan(namaPendek);
+const waHarga = linkWAHarga(namaPendek);
+
+const daftarFaq = faqByIds(l.faqIds);
+const proyek = portofolioByPayung(l.payung);
+const testimoni = testimoniByLayanan(l.slug);
+const saudara = l.linkSaudara.map((s) => layananBySlug(s)).filter((x) => x !== undefined);
+
+const jalur = [
+  { nama: 'Beranda', url: '/' },
+  { nama: PAYUNG_LABEL[l.payung], url: `/${l.slug}/` },
+  { nama: namaPendek, url: `/${l.slug}/` },
+];
+
+const skema = [schemaLayanan(l), schemaFaq(daftarFaq), schemaRemah(jalur)].filter(Boolean);
+---
+
+<BaseLayout title={l.title} deskripsi={l.deskripsi} path={`/${l.slug}/`} skema={skema}>
+  <Remah jalur={jalur} />
+
+  <!-- 1. Judul, pembuka, dan tombol WhatsApp di atas lipatan layar -->
+  <section class="mx-auto max-w-4xl px-4 pb-10 pt-12 sm:pt-16">
+    <p class="mb-3 text-sm font-semibold uppercase tracking-wide text-aksen-600">
+      {PAYUNG_LABEL[l.payung]} · {BISNIS.alamat.kota} dan sekitarnya
+    </p>
+    <h1 class="text-3xl font-extrabold leading-tight tracking-tight text-wje-950 sm:text-4xl lg:text-5xl">
+      {l.h1}
+    </h1>
+    <p class="mt-5 text-lg leading-relaxed text-wje-800">{l.intro}</p>
+
+    <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+      <TombolWA href={waUtama} posisi="hero" label="Tanya Lewat WhatsApp" />
+      <a
+        href={TELEPON_HREF}
+        data-wa="telepon-hero"
+        class="inline-flex items-center justify-center rounded-xl border-2 border-wje-950 px-7 py-4 text-base font-bold text-wje-950 transition hover:bg-wje-950 hover:text-white"
+      >
+        Telepon {BISNIS.kontak.waTampil}
+      </a>
+    </div>
+    <p class="mt-4 text-sm text-wje-600">
+      Survey lokasi gratis. {BISNIS.jamBukaTampil}.
+    </p>
+  </section>
+
+  <!-- 2. Gambar ilustrasi bidang. Bukan foto proyek, jadi keterangannya netral. -->
+  <div class="mx-auto max-w-5xl px-4">
+    <Image
+      src={ILUSTRASI[l.payung]}
+      alt={ALT_ILUSTRASI[l.payung]}
+      widths={[640, 1024]}
+      sizes="(max-width: 1024px) 100vw, 1024px"
+      class="aspect-16/9 w-full rounded-2xl object-cover"
+      loading="eager"
+      fetchpriority="high"
+    />
+  </div>
+
+  <!-- 3. Bukti cepat -->
+  <BuktiCepat />
+
+  <!-- 4. Layanan yang dicakup -->
+  <section class="mx-auto max-w-4xl px-4 py-14">
+    <h2 class="mb-6 text-2xl font-bold text-wje-950 sm:text-3xl">Yang Kami Kerjakan</h2>
+    <ul class="grid gap-3 sm:grid-cols-2">
+      {
+        l.layananDicakup.map((item) => (
+          <li class="flex gap-3 rounded-lg border border-wje-100 p-4">
+            <span class="mt-0.5 shrink-0 font-bold text-aksen-600" aria-hidden="true">
+              &check;
+            </span>
+            <span class="text-wje-800">{item}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <!-- 5. Spesifikasi -->
+  <TabelSpesifikasi judul="Spesifikasi dan Cakupan" baris={l.spesifikasi} />
+
+  <!-- 6. Foto proyek nyata -->
+  <GaleriProyek proyek={proyek} />
+
+  <!-- 7. Proses kerja -->
+  <ProsesKerja />
+
+  <!-- 8. Apa yang mempengaruhi harga -->
+  <section class="mx-auto max-w-3xl px-4 py-14">
+    <h2 class="mb-3 text-2xl font-bold text-wje-950 sm:text-3xl">
+      Apa yang Mempengaruhi Biayanya
+    </h2>
+    <p class="mb-6 text-wje-600">
+      Kami tidak memasang satu harga untuk semua, karena kebutuhan tiap tempat berbeda. Ini yang
+      kami hitung saat menyusun penawaran Anda.
+    </p>
+    <ul class="space-y-2.5">
+      {
+        l.pemicuHarga.map((p) => (
+          <li class="flex gap-3">
+            <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-aksen-500" aria-hidden="true" />
+            <span class="text-wje-800">{p}</span>
+          </li>
+        ))
+      }
+    </ul>
+    <div class="mt-8">
+      <TombolWA href={waHarga} posisi="harga" label="Minta Penawaran Tertulis" />
+    </div>
+  </section>
+
+  <!-- 9. Testimoni -->
+  <SeksiTestimoni daftar={testimoni} />
+
+  <!-- 10. Tautan ke halaman uang lain, bagian dari jaringan internal link -->
+  {
+    saudara.length > 0 && (
+      <section class="mx-auto max-w-5xl px-4 py-10">
+        <h2 class="mb-5 text-xl font-bold text-wje-950">Layanan Kami yang Lain</h2>
+        <ul class="grid gap-4 sm:grid-cols-3">
+          {saudara.map((s) => (
+            <li>
+              <a
+                href={`/${s.slug}/`}
+                class="block h-full rounded-xl border border-wje-100 p-5 transition hover:border-aksen-400 hover:bg-wje-50"
+              >
+                <span class="block font-semibold text-wje-950">{s.h1.split('—')[0].trim()}</span>
+                <span class="mt-1 block text-sm text-wje-600">{s.ringkas}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  <!-- 11. Tanya jawab -->
+  <SeksiFAQ daftar={daftarFaq} />
+
+  <!-- 12. Artikel pendukung, diisi bertambah tiap minggu -->
+  <ArtikelTerkait slugArtikel={l.artikelTerkait} />
+
+  <!-- 13. Penutup -->
+  <CTAPenutup
+    hrefWA={waUtama}
+    judul={`Butuh ${namaPendek}?`}
+    posisi="penutup-layanan"
+  />
+</BaseLayout>
