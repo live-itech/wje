@@ -19,7 +19,7 @@ export const FAQ: Faq[] = [
   { id: 'crane-lama-pasang', tanya: 'Berapa lama pemasangan hoist crane sampai bisa dipakai?', jawab: PERLU_DIISI },
   { id: 'crane-bangunan-lama', tanya: 'Bangunan pabrik saya sudah berdiri, apakah masih bisa dipasang crane?', jawab: 'Bisa, dan ini justru pekerjaan yang paling sering kami tangani. Kami periksa dulu kekuatan kolom dan kuda-kuda yang ada. Kalau tidak memadai, kami buatkan tiang dan runway beam berdiri sendiri sehingga beban crane tidak membebani struktur bangunan Anda.' },
   { id: 'crane-garansi', tanya: 'Apakah ada garansi?', jawab: PERLU_DIISI },
-  { id: 'crane-luar-kota', tanya: 'Apakah melayani di luar Surabaya?', jawab: 'Ya. Kami rutin mengerjakan proyek di Sidoarjo, Gresik, Mojokerto, dan Pasuruan. Untuk lokasi di luar itu, silakan hubungi kami dulu untuk memastikan biaya mobilisasinya.' },
+  { id: 'crane-luar-kota', tanya: 'Apakah melayani di luar Surabaya?', jawab: 'Ya. Kami sering mengerjakan proyek crane di Sidoarjo, Gresik, Mojokerto, Pasuruan, dan kota lain di Jawa Timur, dan juga menerima proyek di luar Jawa Timur. Hubungi kami dengan menyebutkan lokasinya, supaya biaya mobilisasi bisa dihitung di penawaran.' },
   { id: 'crane-riksa-uji', tanya: 'Apakah crane baru wajib riksa uji?', jawab: 'Ya. Pesawat angkat wajib diperiksa dan diuji oleh pihak berwenang sebelum dioperasikan, dan diulang secara berkala. Kami mendampingi proses ini termasuk menyiapkan dokumen teknis yang diminta.' },
 
   // ── Service crane ──
@@ -55,7 +55,7 @@ export const FAQ: Faq[] = [
   { id: 'listrik-slo', tanya: 'Apakah WJE bisa mengurus SLO?', jawab: PERLU_DIISI },
   { id: 'listrik-garansi', tanya: 'Apakah pekerjaan listrik bergaransi?', jawab: PERLU_DIISI },
   { id: 'listrik-survey', tanya: 'Apakah survey lokasi dikenakan biaya?', jawab: 'Tidak. Survey dan penawaran tertulis gratis, tanpa kewajiban melanjutkan. Anda bebas membandingkan penawaran kami dengan penyedia lain.' },
-  { id: 'listrik-luar-kota', tanya: 'Apakah melayani pabrik di luar Surabaya?', jawab: 'Ya, kami rutin mengerjakan di Sidoarjo, Gresik, Mojokerto, dan Pasuruan.' },
+  { id: 'listrik-luar-kota', tanya: 'Apakah melayani pabrik di luar Surabaya?', jawab: 'Ya. Selain Surabaya, kami sering mengerjakan pabrik di Sidoarjo, Gresik, Mojokerto, Pasuruan, dan kawasan industri lain di Jawa Timur. Proyek di luar Jawa Timur juga bisa didiskusikan.' },
   { id: 'listrik-pabrik-jalan', tanya: 'Pabrik saya tidak bisa berhenti produksi, bagaimana?', jawab: 'Pekerjaan kami bagi bertahap dan bagian yang harus mematikan aliran listrik dikerjakan di jadwal yang Anda tentukan, misalnya saat libur atau pergantian shift. Rencana tahapannya kami sampaikan tertulis sebelum pekerjaan dimulai.' },
 
   // ── Instalasi pabrik ──

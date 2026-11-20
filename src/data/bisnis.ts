@@ -59,7 +59,12 @@ export const BISNIS = {
   jamBukaTampil: 'Senin sampai Jumat 08.00 - 17.00, Sabtu 08.00 - 15.00',
   catatanJam: 'Panggilan darurat crane dan listrik dilayani di luar jam kerja.',
 
-  /** Kota yang dilayani. Dipakai untuk schema areaServed dan halaman area. */
+  /**
+   * Kota target SEO. Dipakai untuk schema areaServed dan halaman area.
+   * JANGAN ditampilkan sebagai daftar tertutup ("melayani 5 kota") di teks
+   * halaman. Usaha ini menerima proyek di luar daftar ini juga. Untuk teks
+   * yang dibaca pengunjung, pakai `areaTampil` / `areaSingkat`.
+   */
   areaLayanan: [
     'Surabaya',
     'Sidoarjo',
@@ -67,6 +72,11 @@ export const BISNIS = {
     'Mojokerto',
     'Pasuruan',
   ],
+
+  /** Kalimat area untuk pengunjung. Kota target disebut sebagai contoh, bukan batas. */
+  areaTampil:
+    'Berbasis di Surabaya, mengerjakan proyek di Sidoarjo, Gresik, Mojokerto, Pasuruan, dan kota lain di Jawa Timur maupun luar Jawa Timur.',
+  areaSingkat: 'Surabaya · Seluruh Jawa Timur · Luar Kota',
 
   /**
    * Legalitas yang boleh ditampilkan. Ini menaikkan kepercayaan pembeli pabrik
@@ -83,7 +93,6 @@ export const BISNIS = {
   buktiCepat: {
     tahunPengalaman: PERLU_DIISI,
     proyekSelesai: PERLU_DIISI,
-    jumlahKota: 5,
     garansiBulan: PERLU_DIISI,
   },
 

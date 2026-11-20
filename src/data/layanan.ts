@@ -54,7 +54,7 @@ export const LAYANAN: Layanan[] = [
     h1: 'Hoist Crane Surabaya — Instalasi, Fabrikasi, dan Service',
     title: 'Hoist Crane Surabaya | Instalasi & Fabrikasi - CV WJE',
     deskripsi: 'Jasa instalasi dan fabrikasi hoist crane di Surabaya dan sekitarnya. Survey lokasi gratis, penawaran tertulis, garansi. Hubungi WhatsApp kami.',
-    intro: 'CV Wahyu Jaya Elektrik mengerjakan instalasi, fabrikasi, dan perbaikan hoist crane untuk pabrik dan bengkel di Surabaya, Sidoarjo, Gresik, Mojokerto, dan Pasuruan. Kami mengerjakan dari perhitungan struktur, pembuatan rel, pemasangan hoist, sampai panel kendali. Survey lokasi gratis tanpa kewajiban melanjutkan.',
+    intro: 'CV Wahyu Jaya Elektrik mengerjakan instalasi, fabrikasi, dan perbaikan hoist crane untuk pabrik dan bengkel di Surabaya dan berbagai kota di Jawa Timur, seperti Sidoarjo, Gresik, Mojokerto, dan Pasuruan. Kami mengerjakan dari perhitungan struktur, pembuatan rel, pemasangan hoist, sampai panel kendali. Survey lokasi gratis tanpa kewajiban melanjutkan.',
     ringkas: 'Instalasi dan fabrikasi hoist crane untuk pabrik, bengkel, dan gudang.',
     layananDicakup: [
       'Perhitungan dan perancangan struktur crane sesuai beban kerja',

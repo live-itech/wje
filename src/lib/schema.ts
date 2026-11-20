@@ -67,7 +67,10 @@ export function schemaBisnis() {
         ? { '@type': 'GeoCoordinates', latitude: a.lat, longitude: a.lng }
         : undefined,
     hasMap: a.googleMapsUrl,
-    areaServed: BISNIS.areaLayanan.map((kota) => ({ '@type': 'City', name: kota })),
+    areaServed: [
+      ...BISNIS.areaLayanan.map((kota) => ({ '@type': 'City', name: kota })),
+      { '@type': 'State', name: 'Jawa Timur' },
+    ],
     openingHoursSpecification: BISNIS.jamBuka.map((j) => ({
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: j.hari,
@@ -89,7 +92,10 @@ export function schemaLayanan(l: Layanan) {
     serviceType: l.keyword,
     url: `${SITUS.domain}/${l.slug}/`,
     provider: { '@id': ID_BISNIS },
-    areaServed: BISNIS.areaLayanan.map((kota) => ({ '@type': 'City', name: kota })),
+    areaServed: [
+      ...BISNIS.areaLayanan.map((kota) => ({ '@type': 'City', name: kota })),
+      { '@type': 'State', name: 'Jawa Timur' },
+    ],
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
       name: l.h1,
