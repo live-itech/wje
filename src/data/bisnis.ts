@@ -49,6 +49,9 @@ export const BISNIS = {
     lng: 112.6557995,
     // Tempel URL Google Maps milik usaha di sini setelah GBP jadi.
     googleMapsUrl: 'https://maps.app.goo.gl/LXM3RXJxKUCZkPwp8',
+    // ID listing Google Business Profile (cid). Dipakai untuk peta tersemat,
+    // supaya pin yang tampil adalah profil GBP, bukan sekadar titik koordinat.
+    googleMapsCid: '12391535939974784629',
   },
 
   /** Ditulis dalam format yang dipakai schema.org. */

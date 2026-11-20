@@ -1,0 +1,51 @@
+---
+/**
+ * Peta lokasi workshop yang menunjuk ke listing Google Business Profile.
+ *
+ * Iframe memakai cid GBP, jadi pin yang tampil membawa nama, ulasan, dan
+ * tombol rute dari profil Google. Tombol di bawah peta membuka profil yang
+ * sama di aplikasi Google Maps. Semua data diambil dari bisnis.ts.
+ */
+import { BISNIS, belumDiisi } from '../data/bisnis';
+
+interface Props {
+  judul?: string;
+}
+const { judul = 'Lokasi Workshop' } = Astro.props;
+
+const a = BISNIS.alamat;
+const barisAlamat = [a.jalan, a.kelurahan, a.kecamatan, `${a.kota}, ${a.provinsi}`, a.kodePos]
+  .filter((v) => v && !belumDiisi(v))
+  .join(', ');
+const adaPeta = !belumDiisi(a.googleMapsCid) && !belumDiisi(a.googleMapsUrl);
+const srcPeta = `https://maps.google.com/maps?cid=${a.googleMapsCid}&hl=id&output=embed`;
+---
+
+{
+  adaPeta && (
+    <section class="mx-auto max-w-3xl px-4 py-12">
+      <h2 class="mb-4 text-2xl font-bold text-wje-950">{judul}</h2>
+      <p class="mb-5 text-wje-800">{barisAlamat}</p>
+      <div class="overflow-hidden rounded-xl border border-wje-100 bg-wje-50">
+        <iframe
+          src={srcPeta}
+          title={`Peta lokasi ${BISNIS.nama} di Google Maps`}
+          class="block h-80 w-full sm:h-96"
+          style="border:0"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen
+        />
+      </div>
+      <a
+        href={a.googleMapsUrl}
+        target="_blank"
+        rel="noopener"
+        class="mt-4 inline-flex items-center gap-2 rounded-lg border border-wje-300 px-4 py-2.5 text-sm font-semibold text-wje-900 hover:border-aksen-500 hover:text-aksen-600"
+      >
+        Buka di Google Maps &amp; lihat ulasan
+        <span aria-hidden="true">→</span>
+      </a>
+    </section>
+  )
+}

@@ -11,6 +11,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Remah from '../components/Remah.astro';
 import CTAPenutup from '../components/CTAPenutup.astro';
 import BuktiCepat from '../components/BuktiCepat.astro';
+import PetaLokasi from '../components/PetaLokasi.astro';
 import { BISNIS, belumDiisi } from '../data/bisnis';
 import { LAYANAN, PAYUNG_LABEL, type Payung } from '../data/layanan';
 import { linkWA } from '../lib/wa';
@@ -161,6 +162,8 @@ const jalur = [
       </li>
     </ul>
   </section>
+
+  <PetaLokasi />
 
   <CTAPenutup
     hrefWA={linkWA(`Halo ${BISNIS.nama}, saya ingin berkenalan dan bertanya soal layanan Anda.`)}
