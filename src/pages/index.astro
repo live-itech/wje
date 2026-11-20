@@ -4,7 +4,7 @@
  *
  * Tugas beranda di web jasa seperti ini bukan menjelaskan panjang lebar, tapi
  * menyalurkan pengunjung ke halaman uang yang tepat secepat mungkin, sambil
- * memberi tautan ke kesembilan halaman itu dari satu tempat.
+ * memberi tautan ke semua halaman uang dari satu tempat.
  */
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -39,8 +39,8 @@ const daftarFaq = faqByIds([
 ---
 
 <BaseLayout
-  title="Hoist Crane, Lift Barang & Listrik Industri Surabaya"
-  deskripsi="CV Wahyu Jaya Elektrik: instalasi hoist crane, pembuatan lift barang, dan instalasi listrik pabrik di Surabaya dan sekitarnya. Survey gratis, hubungi WhatsApp."
+  title="Listrik Crane Surabaya | Pasang Crane & Box Panel - WJE"
+  deskripsi="Listrik crane Surabaya: pasang crane, panel kontrol dan perbaikan listrik crane, box panel listrik, lift barang. Survey gratis, hubungi WhatsApp kami."
   path="/"
 >
   <!-- Hero. Gambar latar dimuat eager karena ini gambar terbesar yang pertama
@@ -62,11 +62,13 @@ const daftarFaq = faqByIds([
         {BISNIS.areaSingkat}
       </p>
       <h1 class="text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl">
-        Hoist Crane, Lift Barang, dan Instalasi Listrik Industri di Surabaya
+        Listrik Crane Surabaya: Pasang Crane, Panel Crane, dan Box Panel Listrik
       </h1>
       <p class="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-wje-300">
-        {BISNIS.nama} mengerjakan instalasi dan fabrikasi hoist crane, pembuatan lift barang, serta
-        pekerjaan kelistrikan pabrik dan bangunan usaha. Survey lokasi gratis, penawaran tertulis,
+        {BISNIS.nama} mengerjakan <a href="/pasang-crane-surabaya/" class="font-semibold text-white underline decoration-aksen-400 underline-offset-4">pemasangan crane</a>,{' '}
+        <a href="/listrik-crane-surabaya/" class="font-semibold text-white underline decoration-aksen-400 underline-offset-4">kelistrikan dan perbaikan listrik crane</a>,{' '}
+        pembuatan <a href="/box-listrik-surabaya/" class="font-semibold text-white underline decoration-aksen-400 underline-offset-4">box panel listrik</a>,
+        lift barang, serta instalasi listrik pabrik. Survey lokasi gratis, penawaran tertulis,
         dikerjakan tim sendiri.
       </p>
 
@@ -86,7 +88,7 @@ const daftarFaq = faqByIds([
 
   <BuktiCepat />
 
-  <!-- Tiga payung layanan, menautkan ke kesembilan halaman uang -->
+  <!-- Tiga payung layanan, menautkan ke semua halaman uang -->
   <section class="mx-auto max-w-6xl px-4 py-16">
     <h2 class="mb-2 text-2xl font-bold text-wje-950 sm:text-3xl">Tiga Bidang yang Kami Kerjakan</h2>
     <p class="mb-10 text-wje-600">Pilih yang paling mendekati kebutuhan Anda.</p>

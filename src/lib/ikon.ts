@@ -1,5 +1,5 @@
 /**
- * Pemetaan ikon garis ke bidang usaha dan ke sembilan halaman uang.
+ * Pemetaan ikon garis ke bidang usaha dan ke semua halaman uang.
  *
  * Ikon di sini hanya penanda visual supaya pengunjung dari HP cepat menemukan
  * halaman yang cocok dengan kebutuhannya. Semakin cepat mereka sampai ke halaman
@@ -22,6 +22,9 @@ export const IKON_PAYUNG: Record<Payung, string> = {
  * Boleh ada yang memakai ikon sama, karena hanya satu yang tampil per halaman.
  */
 const IKON_SLUG: Record<string, string> = {
+  'listrik-crane-surabaya': 'panel',
+  'pasang-crane-surabaya': 'crane',
+  'box-listrik-surabaya': 'panel',
   'hoist-crane-surabaya': 'crane',
   'service-hoist-crane-surabaya': 'service',
   'harga-hoist-crane': 'hoist',

@@ -1,12 +1,12 @@
 ---
 /**
- * Sembilan halaman uang, dibangun dari src/data/layanan.ts.
+ * Semua halaman uang, dibangun dari src/data/layanan.ts.
  *
  * Susunannya mengikuti kerangka di RENCANA-WEBSITE-SEO-WJE.md bagian 4, urut dari
  * yang paling menentukan konversi: judul, pembuka, tombol WhatsApp di atas lipatan
  * layar, baru bukti, spesifikasi, foto, proses, harga, testimoni, FAQ, penutup.
  *
- * Semuanya satu berkas karena kesembilan halaman wajib seragam. Kalau tiap halaman
+ * Semuanya satu berkas karena semua halaman wajib seragam. Kalau tiap halaman
  * dibuat terpisah, cepat atau lambat ada yang lupa memasang FAQ atau blok artikel
  * terkait, dan halaman itu langsung tertinggal peringkatnya.
  */
@@ -34,6 +34,7 @@ import { linkWALayanan, linkWAHarga, TELEPON_HREF } from '../lib/wa';
 import { schemaLayanan, schemaFaq, schemaRemah } from '../lib/schema';
 import { ILUSTRASI, ALT_ILUSTRASI } from '../lib/ilustrasi';
 import { ikonLayanan } from '../lib/ikon';
+import { mdMini } from '../lib/teks';
 
 export const getStaticPaths = (() =>
   LAYANAN.map((l) => ({ params: { layanan: l.slug } }))) satisfies GetStaticPaths;
@@ -120,6 +121,24 @@ const skema = [schemaLayanan(l), schemaFaq(daftarFaq), schemaRemah(jalur)].filte
       }
     </ul>
   </section>
+
+  <!-- 4b. Uraian panjang, hanya di halaman fokus SEO yang mengisinya -->
+  {
+    l.uraian && l.uraian.length > 0 && (
+      <div class="mx-auto max-w-3xl px-4 pb-6">
+        {l.uraian.map((u) => (
+          <section class="py-8">
+            <h2 class="mb-4 text-2xl font-bold text-wje-950 sm:text-3xl">{u.judul}</h2>
+            <div class="space-y-4 text-lg leading-relaxed text-wje-800">
+              {u.isi.map((para) => (
+                <p set:html={mdMini(para)} />
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+    )
+  }
 
   <!-- 5. Spesifikasi -->
   <TabelSpesifikasi judul="Spesifikasi dan Cakupan" baris={l.spesifikasi} />

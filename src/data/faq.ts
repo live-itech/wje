@@ -15,6 +15,19 @@ import { PERLU_DIISI } from './bisnis';
 export type Faq = { id: string; tanya: string; jawab: string };
 
 export const FAQ: Faq[] = [
+  // ── Listrik crane ──
+  { id: 'listrikcrane-merk-lain', tanya: 'Crane saya merk lain dan bukan buatan WJE, apakah listriknya tetap bisa ditangani?', jawab: 'Bisa. Kelistrikan crane pada dasarnya sama: suplai daya, panel kontrol, kendali operator, dan pengaman. Kami menangani crane dari merk apa pun dan kapasitas berapa pun, termasuk crane lama yang dokumen dan gambar panelnya sudah tidak ada.' },
+  { id: 'listrikcrane-tanpa-ganti', tanya: 'Apakah panel crane lama harus diganti semua?', jawab: 'Tidak selalu. Kami periksa dulu kondisinya. Kalau rangka panel dan sebagian besar komponen masih baik, cukup komponen yang rusak atau aus yang diganti. Penggantian panel menyeluruh baru kami sarankan kalau komponennya sudah tidak diproduksi atau kerusakannya berulang di banyak titik.' },
+  { id: 'listrikcrane-inverter', tanya: 'Crane saya menghentak saat jalan dan berhenti, bisa diperbaiki?', jawab: 'Bisa. Hentakan itu ciri crane yang dikendalikan kontaktor biasa. Dengan menambahkan inverter ke panel, gerakan crane mulai dan berhenti secara bertahap sehingga beban tidak berayun dan komponen mekanis lebih awet. Panel lama sering bisa dimodifikasi tanpa harus diganti semua.' },
+  { id: 'listrikcrane-remote', tanya: 'Apakah crane yang masih pakai tombol pendant bisa diganti remote?', jawab: 'Bisa. Receiver remote dipasang di panel crane dan disambungkan ke rangkaian kontrol yang sudah ada. Tombol pendant juga bisa tetap dipertahankan sebagai cadangan.' },
+  // ── Pasang crane ──
+  { id: 'pasang-jenis-crane', tanya: 'Jenis crane apa saja yang bisa dipasang?', jawab: 'Kami memasang overhead crane single girder dan double girder, gantry crane, dan monorail hoist, untuk berbagai kapasitas sesuai kebutuhan. Jenis yang tepat kami tentukan bersama Anda saat survey, berdasarkan beban, luas area, dan kondisi bangunan.' },
+  { id: 'pasang-sewa-crane', tanya: 'Apakah WJE menyewakan mobile crane atau tower crane?', jawab: 'Tidak. Kami memasang crane permanen untuk pabrik, gudang, dan bengkel, seperti overhead crane, gantry crane, dan monorail hoist. Kami tidak menyewakan mobile crane atau tower crane untuk proyek gedung.' },
+  // ── Box listrik ──
+  { id: 'box-kosong', tanya: 'Apakah bisa pesan box panel kosong saja, tanpa komponen?', jawab: 'Bisa. Kami membuat box kosong sesuai ukuran yang Anda butuhkan, untuk Anda atau teknisi Anda rakit sendiri. Kami juga bisa membuat panel lengkap yang sudah terpasang komponen dan siap disambung.' },
+  { id: 'box-ukuran', tanya: 'Ukuran box panel bisa disesuaikan?', jawab: 'Bisa, karena box dibuat di workshop kami sendiri. Ukuran, jumlah pintu, posisi lubang kabel, dan ventilasi mengikuti isi panel dan tempat pemasangannya. Kirim daftar komponen dan foto lokasi lewat WhatsApp, kami bantu tentukan ukurannya.' },
+  { id: 'box-lama', tanya: 'Berapa lama pembuatan box panel?', jawab: PERLU_DIISI },
+  { id: 'box-pasang', tanya: 'Apakah box panel sekaligus dipasang di lokasi?', jawab: 'Bisa. Selain membuat, kami juga memasang box panel di lokasi, menyambungkan kabel masuk dan keluar, lalu mengujinya. Kami juga menerima perbaikan dan perapian panel lama.' },
   // ── Crane umum ──
   { id: 'crane-lama-pasang', tanya: 'Berapa lama pemasangan hoist crane sampai bisa dipakai?', jawab: PERLU_DIISI },
   { id: 'crane-bangunan-lama', tanya: 'Bangunan pabrik saya sudah berdiri, apakah masih bisa dipasang crane?', jawab: 'Bisa, dan ini justru pekerjaan yang paling sering kami tangani. Kami periksa dulu kekuatan kolom dan kuda-kuda yang ada. Kalau tidak memadai, kami buatkan tiang dan runway beam berdiri sendiri sehingga beban crane tidak membebani struktur bangunan Anda.' },

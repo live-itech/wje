@@ -94,6 +94,8 @@ async function cekArtikel() {
   // Keyword halaman uang dibaca langsung dari layanan.ts.
   const sumberLayanan = await readFile(join(AKAR, 'src/data/layanan.ts'), 'utf8');
   const keywordUang = [...sumberLayanan.matchAll(/^\s*keyword:\s*'([^']+)'/gm)].map((m) => m[1]);
+  // Keyword milik beranda (domain exact match). Artikel juga tidak boleh mengejarnya.
+  keywordUang.push('listrik crane surabaya');
   const slugUang = [...sumberLayanan.matchAll(/^\s*slug:\s*'([^']+)'/gm)].map((m) => m[1]);
 
   let bersih = true;
