@@ -1,0 +1,25 @@
+---
+/**
+ * Ikon garis dari berkas PNG transparan di `public/ikon/`.
+ *
+ * Dipasang sebagai mask CSS, bukan sebagai <img>, supaya warnanya ikut warna
+ * teks di sekitarnya. Berkas aslinya bergaris hitam; yang dipakai hanya bentuk
+ * transparansinya, warnanya diambil dari `currentColor`.
+ *
+ * Selalu dekoratif. Arti ikon sudah ditulis di teks sebelahnya, jadi ikon ini
+ * disembunyikan dari pembaca layar supaya tidak dibacakan dua kali.
+ */
+type Props = {
+  /** Nama berkas tanpa .png: crane, hoist, panel, daya, lift, service. */
+  nama: string;
+  kelas?: string;
+};
+
+const { nama, kelas = 'h-6 w-6' } = Astro.props;
+const mask = `url('/ikon/${nama}.png') center / contain no-repeat`;
+---
+
+<span
+  class:list={['inline-block shrink-0 bg-current', kelas]}
+  style={`-webkit-mask: ${mask}; mask: ${mask};`}
+  aria-hidden="true"></span>

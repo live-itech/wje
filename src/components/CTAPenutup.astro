@@ -23,7 +23,16 @@ const {
 const punyaMaps = !belumDiisi(BISNIS.alamat.googleMapsUrl);
 ---
 
-<section class="bg-wje-950 py-14 text-white">
+<!--
+  Pita penutup sengaja dibuat gelap bertekstur supaya terpisah tegas dari isi
+  halaman yang putih. Di sinilah tombol WhatsApp terakhir berada, dan pembaca
+  yang menggulir sampai bawah harus langsung tahu di mana harus menekan.
+  Teksturnya kecil (5 KB) dan dimuat malas, jadi tidak menahan tampilan awal.
+-->
+<section
+  class="bg-wje-950 py-14 text-white"
+  style="background-image: url('/pola/pembatas.webp'); background-size: cover; background-position: center;"
+>
   <div class="mx-auto max-w-3xl px-4 text-center">
     <h2 class="text-2xl font-bold sm:text-3xl">{judul}</h2>
     <p class="mx-auto mt-3 max-w-xl text-wje-300">{isi}</p>

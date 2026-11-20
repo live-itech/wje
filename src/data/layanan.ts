@@ -117,7 +117,7 @@ export const LAYANAN: Layanan[] = [
     ],
     faqIds: ['service-berapa-lama', 'service-luar-jam', 'service-biaya-survey', 'service-merk-lain', 'service-kontrak'],
     linkSaudara: ['hoist-crane-surabaya', 'harga-hoist-crane', 'instalasi-listrik-pabrik'],
-    artikelTerkait: [],
+    artikelTerkait: ['tanda-hoist-crane-harus-diservis'],
   },
   {
     slug: 'harga-hoist-crane',
@@ -228,7 +228,7 @@ export const LAYANAN: Layanan[] = [
     ],
     faqIds: ['harga-lift-termasuk-apa', 'harga-lift-cicilan', 'harga-lift-beda-vendor', 'lift-lama-buat', 'lift-izin'],
     linkSaudara: ['lift-barang-surabaya', 'jasa-pembuatan-lift-barang', 'harga-hoist-crane'],
-    artikelTerkait: [],
+    artikelTerkait: ['menentukan-kapasitas-ukuran-lift-barang'],
   },
   {
     slug: 'jasa-pembuatan-lift-barang',
@@ -377,7 +377,7 @@ export const LAYANAN: Layanan[] = [
     ],
     faqIds: ['daya-berapa-lama', 'daya-biaya-pln', 'daya-perlu-slo', 'daya-3-phase', 'listrik-survey'],
     linkSaudara: ['kontraktor-listrik-surabaya', 'instalasi-listrik-pabrik', 'lift-barang-surabaya'],
-    artikelTerkait: [],
+    artikelTerkait: ['prosedur-biaya-tambah-daya-listrik-pln'],
   },
 ];
 

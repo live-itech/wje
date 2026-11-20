@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
 // Domain final. Kalau berubah, ubah juga SITUS.domain di src/data/bisnis.ts.
-const SITE = 'https://wahyujayaelectric.com';
+const SITE = 'https://listrikcranesurabaya.com';
 
 // https://astro.build/config
 export default defineConfig({

@@ -94,7 +94,7 @@ export const BISNIS = {
 } as const;
 
 export const SITUS = {
-  domain: 'https://wahyujayaelectric.com',
+  domain: 'https://listrikcranesurabaya.com',
   bahasa: 'id-ID',
   // Isi setelah properti dibuat di Search Console dan Analytics.
   gaId: PERLU_DIISI,

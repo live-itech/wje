@@ -15,6 +15,7 @@ import GaleriProyek from '../components/GaleriProyek.astro';
 import SeksiTestimoni from '../components/SeksiTestimoni.astro';
 import SeksiFAQ from '../components/SeksiFAQ.astro';
 import CTAPenutup from '../components/CTAPenutup.astro';
+import Ikon from '../components/Ikon.astro';
 
 import { BISNIS } from '../data/bisnis';
 import { LAYANAN, PAYUNG_LABEL, type Payung } from '../data/layanan';
@@ -23,6 +24,7 @@ import { PORTOFOLIO } from '../data/portofolio';
 import { TESTIMONI } from '../data/testimoni';
 import { linkWA, TELEPON_HREF } from '../lib/wa';
 import { HERO_BERANDA, ILUSTRASI, ALT_ILUSTRASI } from '../lib/ilustrasi';
+import { IKON_PAYUNG } from '../lib/ikon';
 
 const payungUrut: Payung[] = ['crane', 'lift', 'elektrik'];
 const wa = linkWA(`Halo ${BISNIS.nama}, saya ingin bertanya soal layanan Anda.`);
@@ -102,7 +104,10 @@ const daftarFaq = faqByIds([
               loading="lazy"
             />
             <div class="p-6">
-            <h3 class="mb-4 text-xl font-bold text-wje-950">{PAYUNG_LABEL[p]}</h3>
+            <h3 class="mb-4 flex items-center gap-3 text-xl font-bold text-wje-950">
+              <Ikon nama={IKON_PAYUNG[p]} kelas="h-8 w-8 text-aksen-600" />
+              {PAYUNG_LABEL[p]}
+            </h3>
             <ul class="space-y-3">
               {LAYANAN.filter((l) => l.payung === p).map((l) => (
                 <li>

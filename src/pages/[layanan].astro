@@ -23,6 +23,7 @@ import SeksiTestimoni from '../components/SeksiTestimoni.astro';
 import SeksiFAQ from '../components/SeksiFAQ.astro';
 import ArtikelTerkait from '../components/ArtikelTerkait.astro';
 import CTAPenutup from '../components/CTAPenutup.astro';
+import Ikon from '../components/Ikon.astro';
 
 import { LAYANAN, layananBySlug, PAYUNG_LABEL } from '../data/layanan';
 import { faqByIds } from '../data/faq';
@@ -32,6 +33,7 @@ import { BISNIS } from '../data/bisnis';
 import { linkWALayanan, linkWAHarga, TELEPON_HREF } from '../lib/wa';
 import { schemaLayanan, schemaFaq, schemaRemah } from '../lib/schema';
 import { ILUSTRASI, ALT_ILUSTRASI } from '../lib/ilustrasi';
+import { ikonLayanan } from '../lib/ikon';
 
 export const getStaticPaths = (() =>
   LAYANAN.map((l) => ({ params: { layanan: l.slug } }))) satisfies GetStaticPaths;
@@ -62,7 +64,8 @@ const skema = [schemaLayanan(l), schemaFaq(daftarFaq), schemaRemah(jalur)].filte
 
   <!-- 1. Judul, pembuka, dan tombol WhatsApp di atas lipatan layar -->
   <section class="mx-auto max-w-4xl px-4 pb-10 pt-12 sm:pt-16">
-    <p class="mb-3 text-sm font-semibold uppercase tracking-wide text-aksen-600">
+    <p class="mb-3 flex items-center gap-2.5 text-sm font-semibold uppercase tracking-wide text-aksen-600">
+      <Ikon nama={ikonLayanan(l.slug, l.payung)} kelas="h-6 w-6" />
       {PAYUNG_LABEL[l.payung]} · {BISNIS.alamat.kota} dan sekitarnya
     </p>
     <h1 class="text-3xl font-extrabold leading-tight tracking-tight text-wje-950 sm:text-4xl lg:text-5xl">

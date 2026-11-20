@@ -6,6 +6,7 @@
  * pelanggan pabrik sebelum memutuskan. Yang mereka cari: legalitas, siapa yang
  * mengerjakan, dan bukti bahwa usahanya nyata.
  */
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Remah from '../components/Remah.astro';
 import CTAPenutup from '../components/CTAPenutup.astro';
@@ -14,6 +15,7 @@ import { BISNIS, belumDiisi } from '../data/bisnis';
 import { LAYANAN, PAYUNG_LABEL, type Payung } from '../data/layanan';
 import { linkWA } from '../lib/wa';
 import { schemaRemah } from '../lib/schema';
+import { LATAR_TENTANG, ALT_LATAR_TENTANG } from '../lib/ilustrasi';
 
 const payungUrut: Payung[] = ['crane', 'lift', 'elektrik'];
 const legalitas = BISNIS.legalitas.filter((l) => !belumDiisi(l.nomor));
@@ -53,6 +55,29 @@ const jalur = [
       )
     }
   </section>
+
+  <!--
+    Gambar ilustrasi, bukan bengkel WJE. Keterangannya ditulis terbuka di bawah
+    gambar supaya tidak ada pembaca yang mengira ini foto lokasi kami, sekaligus
+    mengarahkan yang ingin melihat pekerjaan asli ke halaman portofolio.
+    Ganti dengan foto bengkel sendiri begitu tersedia.
+  -->
+  <figure class="mx-auto max-w-5xl px-4 pb-4">
+    <Image
+      src={LATAR_TENTANG}
+      alt={ALT_LATAR_TENTANG}
+      widths={[640, 1024, 1536]}
+      sizes="(max-width: 1024px) 100vw, 1024px"
+      class="aspect-16/9 w-full rounded-2xl object-cover"
+      loading="lazy"
+    />
+    <figcaption class="mt-3 text-sm text-wje-600">
+      Gambar ilustrasi pekerjaan fabrikasi baja.{' '}
+      <a href="/portofolio/" class="font-medium text-aksen-600 underline underline-offset-4 hover:text-aksen-500">
+        Foto pekerjaan kami sendiri ada di halaman portofolio
+      </a>.
+    </figcaption>
+  </figure>
 
   <BuktiCepat />
 
