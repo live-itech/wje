@@ -54,7 +54,7 @@ export const LAYANAN: Layanan[] = [
     h1: 'Hoist Crane Surabaya — Instalasi, Fabrikasi, dan Service',
     title: 'Hoist Crane Surabaya | Instalasi & Fabrikasi - CV WJE',
     deskripsi: 'Jasa instalasi dan fabrikasi hoist crane di Surabaya dan sekitarnya. Survey lokasi gratis, penawaran tertulis, garansi. Hubungi WhatsApp kami.',
-    intro: 'CV Wahyu Jaya Electric mengerjakan instalasi, fabrikasi, dan perbaikan hoist crane untuk pabrik dan bengkel di Surabaya, Sidoarjo, Gresik, Mojokerto, dan Pasuruan. Kami mengerjakan dari perhitungan struktur, pembuatan rel, pemasangan hoist, sampai panel kendali. Survey lokasi gratis tanpa kewajiban melanjutkan.',
+    intro: 'CV Wahyu Jaya Elektrik mengerjakan instalasi, fabrikasi, dan perbaikan hoist crane untuk pabrik dan bengkel di Surabaya, Sidoarjo, Gresik, Mojokerto, dan Pasuruan. Kami mengerjakan dari perhitungan struktur, pembuatan rel, pemasangan hoist, sampai panel kendali. Survey lokasi gratis tanpa kewajiban melanjutkan.',
     ringkas: 'Instalasi dan fabrikasi hoist crane untuk pabrik, bengkel, dan gudang.',
     layananDicakup: [
       'Perhitungan dan perancangan struktur crane sesuai beban kerja',
@@ -91,7 +91,7 @@ export const LAYANAN: Layanan[] = [
     h1: 'Jasa Service Hoist Crane Surabaya',
     title: 'Jasa Service Hoist Crane Surabaya | Teknisi CV WJE',
     deskripsi: 'Crane macet, bunyi kasar, atau rem tidak menahan? Teknisi kami siap ke lokasi Anda di Surabaya dan sekitarnya. Hubungi WhatsApp untuk penanganan cepat.',
-    intro: 'Hoist crane yang berhenti bekerja membuat seluruh lini produksi ikut berhenti. CV Wahyu Jaya Electric melayani perbaikan dan perawatan berkala hoist crane di Surabaya dan sekitarnya, termasuk panggilan di luar jam kerja untuk kerusakan yang menghentikan produksi.',
+    intro: 'Hoist crane yang berhenti bekerja membuat seluruh lini produksi ikut berhenti. CV Wahyu Jaya Elektrik melayani perbaikan dan perawatan berkala hoist crane di Surabaya dan sekitarnya, termasuk panggilan di luar jam kerja untuk kerusakan yang menghentikan produksi.',
     ringkas: 'Perbaikan dan perawatan berkala hoist crane, termasuk panggilan darurat.',
     layananDicakup: [
       'Pemeriksaan menyeluruh dan diagnosa kerusakan',
@@ -164,7 +164,7 @@ export const LAYANAN: Layanan[] = [
     h1: 'Lift Barang Surabaya — Cargo Lift untuk Ruko, Gudang, dan Pabrik',
     title: 'Lift Barang Surabaya | Cargo Lift Custom - CV WJE',
     deskripsi: 'Pembuatan dan pemasangan lift barang di Surabaya dan sekitarnya. Ukuran menyesuaikan bangunan Anda. Survey gratis, hubungi WhatsApp kami.',
-    intro: 'CV Wahyu Jaya Electric membuat dan memasang lift barang untuk ruko, gudang, restoran, dan pabrik di Surabaya dan sekitarnya. Setiap unit dibuat menyesuaikan ukuran bangunan dan jenis barang yang diangkut, bukan ukuran jadi yang dipaksa masuk. Survey lokasi gratis.',
+    intro: 'CV Wahyu Jaya Elektrik membuat dan memasang lift barang untuk ruko, gudang, restoran, dan pabrik di Surabaya dan sekitarnya. Setiap unit dibuat menyesuaikan ukuran bangunan dan jenis barang yang diangkut, bukan ukuran jadi yang dipaksa masuk. Survey lokasi gratis.',
     ringkas: 'Pembuatan dan pemasangan lift barang menyesuaikan bangunan Anda.',
     layananDicakup: [
       'Survey dan pengukuran ruang yang tersedia',
@@ -275,7 +275,7 @@ export const LAYANAN: Layanan[] = [
     h1: 'Kontraktor Listrik Surabaya untuk Industri dan Usaha',
     title: 'Kontraktor Listrik Surabaya | Industri & Pabrik - WJE',
     deskripsi: 'Kontraktor listrik di Surabaya untuk pabrik, gudang, dan ruko. Instalasi, panel, tambah daya, dan pengurusan SLO. Konsultasi lewat WhatsApp.',
-    intro: 'CV Wahyu Jaya Electric menangani pekerjaan kelistrikan untuk pabrik, gudang, ruko, dan bangunan usaha di Surabaya dan sekitarnya. Kami mengerjakan dari perancangan, pembuatan panel, penarikan instalasi, sampai pengurusan SLO. Pekerjaan dikerjakan tim sendiri, bukan dialihkan ke pihak lain.',
+    intro: 'CV Wahyu Jaya Elektrik menangani pekerjaan kelistrikan untuk pabrik, gudang, ruko, dan bangunan usaha di Surabaya dan sekitarnya. Kami mengerjakan dari perancangan, pembuatan panel, penarikan instalasi, sampai pengurusan SLO. Pekerjaan dikerjakan tim sendiri, bukan dialihkan ke pihak lain.',
     ringkas: 'Pekerjaan kelistrikan menyeluruh untuk pabrik, gudang, dan bangunan usaha.',
     layananDicakup: [
       'Perancangan instalasi listrik bangunan usaha dan industri',
@@ -313,7 +313,7 @@ export const LAYANAN: Layanan[] = [
     h1: 'Jasa Instalasi Listrik Pabrik dan Gudang',
     title: 'Jasa Instalasi Listrik Pabrik | Panel & Kabel - WJE',
     deskripsi: 'Instalasi listrik pabrik dan gudang: panel LVMDP, jalur daya mesin, grounding, kapasitor bank. Dikerjakan tanpa menghentikan produksi. Hubungi WhatsApp.',
-    intro: 'Instalasi listrik pabrik berbeda dengan instalasi rumah. Bebannya besar, mesinnya sensitif, dan berhentinya produksi jauh lebih mahal daripada biaya instalasinya. CV Wahyu Jaya Electric mengerjakan instalasi kelistrikan industri di Surabaya dan sekitarnya, termasuk pekerjaan bertahap pada pabrik yang tetap berproduksi.',
+    intro: 'Instalasi listrik pabrik berbeda dengan instalasi rumah. Bebannya besar, mesinnya sensitif, dan berhentinya produksi jauh lebih mahal daripada biaya instalasinya. CV Wahyu Jaya Elektrik mengerjakan instalasi kelistrikan industri di Surabaya dan sekitarnya, termasuk pekerjaan bertahap pada pabrik yang tetap berproduksi.',
     ringkas: 'Instalasi kelistrikan industri, dari panel utama sampai jalur daya mesin.',
     layananDicakup: [
       'Perhitungan kebutuhan daya dan perancangan jalur',
@@ -351,7 +351,7 @@ export const LAYANAN: Layanan[] = [
     h1: 'Tambah Daya Listrik Surabaya, Diurus Sampai Menyala',
     title: 'Tambah Daya Listrik Surabaya | Urus PLN - CV WJE',
     deskripsi: 'Jasa pengurusan tambah daya listrik PLN di Surabaya, dari berkas sampai instalasi siap. MCB sering turun? Hubungi WhatsApp kami untuk konsultasi.',
-    intro: 'MCB yang sering turun sendiri dan lampu yang meredup saat mesin besar menyala adalah tanda daya listrik Anda sudah tidak cukup. CV Wahyu Jaya Electric mengurus penambahan daya PLN di Surabaya dan sekitarnya, sekaligus menyiapkan instalasi dan panel agar daya barunya benar-benar bisa dipakai.',
+    intro: 'MCB yang sering turun sendiri dan lampu yang meredup saat mesin besar menyala adalah tanda daya listrik Anda sudah tidak cukup. CV Wahyu Jaya Elektrik mengurus penambahan daya PLN di Surabaya dan sekitarnya, sekaligus menyiapkan instalasi dan panel agar daya barunya benar-benar bisa dipakai.',
     ringkas: 'Pengurusan tambah daya PLN sekaligus penyesuaian instalasi dan panel.',
     layananDicakup: [
       'Pemeriksaan kebutuhan daya sebenarnya sebelum mengajukan',

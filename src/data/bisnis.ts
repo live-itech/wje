@@ -13,7 +13,7 @@
 export const PERLU_DIISI = 'PERLU_DIISI' as const;
 
 export const BISNIS = {
-  nama: 'CV Wahyu Jaya Electric',
+  nama: 'CV Wahyu Jaya Elektrik',
   namaPendek: 'WJE',
   tagline: 'Hoist Crane, Lift Barang, dan Instalasi Listrik Industri di Surabaya',
 
@@ -37,18 +37,18 @@ export const BISNIS = {
   },
 
   alamat: {
-    jalan: PERLU_DIISI,
-    kelurahan: PERLU_DIISI,
-    kecamatan: PERLU_DIISI,
+    jalan: 'Perumahan Jl. Bukit Bambe Blok FB 11',
+    kelurahan: 'Bangkingan',
+    kecamatan: 'Lakarsantri',
     kota: 'Surabaya',
     provinsi: 'Jawa Timur',
-    kodePos: PERLU_DIISI,
+    kodePos: '60214',
     negara: 'ID',
     // Ambil dari Google Maps setelah Google Business Profile terverifikasi.
-    lat: PERLU_DIISI,
-    lng: PERLU_DIISI,
+    lat: -7.3373285,
+    lng: 112.6557995,
     // Tempel URL Google Maps milik usaha di sini setelah GBP jadi.
-    googleMapsUrl: PERLU_DIISI,
+    googleMapsUrl: 'https://maps.app.goo.gl/LXM3RXJxKUCZkPwp8',
   },
 
   /** Ditulis dalam format yang dipakai schema.org. */

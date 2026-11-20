@@ -1,6 +1,6 @@
-# Website CV Wahyu Jaya Electric
+# Website CV Wahyu Jaya Elektrik
 
-Situs statis Astro untuk CV Wahyu Jaya Electric (Surabaya): hoist crane, lift
+Situs statis Astro untuk CV Wahyu Jaya Elektrik (Surabaya): hoist crane, lift
 barang, dan instalasi listrik industri. Dibangun untuk satu tujuan, yaitu
 mengubah pencarian Google menjadi chat WhatsApp yang masuk ke pemilik usaha.
 
